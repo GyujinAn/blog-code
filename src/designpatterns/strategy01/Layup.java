@@ -1,4 +1,4 @@
-package designpatterns.strategy;
+package designpatterns.strategy01;
 
 /**
  * @author agj017@gmail.com
