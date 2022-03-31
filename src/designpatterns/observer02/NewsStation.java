@@ -1,4 +1,4 @@
-package designpatterns.observer01;
+package designpatterns.observer02;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +52,7 @@ public class NewsStation implements Subject {
         if(!isSending) {
             isSending = true;
             for(Observer observer: observers){
-                observer.update(title, contents);
+                observer.update(this);
             }
             isSending = false;
         }

@@ -5,38 +5,35 @@ package designpatterns.observer01;
  * @since 2022/03/29
  */
 class ProblemMailSender {
-    void send(String newsflash){
-        System.out.println("--- 메일 속보 발송 ---");
-        System.out.println("내용: " + newsflash);
+    void update(String title, String contents){
+        System.out.println("---메전송---");
+        System.out.println("제목: " + title);
+        System.out.println("내용: " + contents);
     }
 
 }
 
 class ProblemMessageSender {
-    void send(String newsflash){
-        System.out.println("--- 문자 속보 발송 ---");
-        System.out.println("내용: " + newsflash);
+    void update(String title, String contents){
+        System.out.println("---문자전송---");
+        System.out.println("제목: " + title);
+        System.out.println("내용: " + contents);
     }
 }
 
 class ProblemFaxSender {
-    void send(String newsflash){
-        System.out.println("--- 팩스 속보 발송 ---");
-        System.out.println("내용: " + newsflash);
+    void update(String title, String contents){
+        System.out.println("---팩스전송---");
+        System.out.println("제목: " + title);
+        System.out.println("내용: " + contents);
     }
 }
 
-//class ProblemLineSender{
-//
-//}
-//
-//class ProblemKakaoSender{
-//
-//}
-
 class ProblemNewsStation{
 
-    String newsflash;
+    String title;
+
+    String contents;
 
     ProblemMailSender problemMailSender = new ProblemMailSender();
 
@@ -44,21 +41,18 @@ class ProblemNewsStation{
 
     ProblemFaxSender problemFaxSender = new ProblemFaxSender();
 
-    public String getNewsflash() {
-        return newsflash;
-    }
-
-    public void setNewsflash(String newsflash) {
-        this.newsflash = newsflash;
-        problemMailSender.send(newsflash);
-        problemMessageSender.send(newsflash);
-        problemFaxSender.send(newsflash);
+    public void setNewsflash(String title, String contents) {
+        this.title = title;
+        this.contents = contents;
+        problemMailSender.update(title, contents);
+        problemMessageSender.update(title, contents);
+        problemFaxSender.update(title, contents);
     }
 }
 
 public class ProblemSituation {
 
     public static void main(String[] args) {
-        new ProblemNewsStation().setNewsflash("속보!! 외계인이 침공하였다.");
+        new ProblemNewsStation().setNewsflash("우크라이나 러시아 종전 선언","러시아 패배로 인하여 전쟁이 종료되었다.");;
     }
 }
