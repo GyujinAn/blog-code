@@ -8,7 +8,7 @@ import spring.decorator01.repo.*;
 import spring.decorator01.svc.ConsistencyMemberService;
 import spring.decorator01.svc.IdConversionMemberService;
 import spring.decorator01.svc.MemberService;
-
+import spring.decorator01.svc.MemberServiceImpl;
 
 
 /**
@@ -20,9 +20,6 @@ import spring.decorator01.svc.MemberService;
 public class MemberServiceConfiguration {
 
     @Autowired
-    MemberService memberServiceImpl;
-
-    @Autowired
     CertificationEmailRepository certificationEmailRepository;
 
     @Autowired
@@ -31,19 +28,43 @@ public class MemberServiceConfiguration {
     @Autowired
     TeamRepository teamRepository;
 
-    
-    MemberService idConversionMemberService(MemberService memberService){
+    @Autowired
+    MemberService memberServiceImpl;
 
-        return new IdConversionMemberService(memberService);
+    @Bean
+    MemberService idConversionConsistencyMemberServiceImpl(){
+
+        return idConversionMemberService()
+                .setMemberService(
+                        consistencyMemberService()
+                        .setMemberService(memberServiceImpl)
+                );
     }
 
+    @Bean
+    MemberService consistencyMemberServiceImpl(){
 
-    MemberService consistencyMemberService(MemberService memberService){
-
-        return new ConsistencyMemberService(memberService);
+        return consistencyMemberService()
+                .setMemberService(memberServiceImpl);
     }
 
+    @Bean
+    MemberService idConversionMemberServiceImpl(){
+        return idConversionMemberService()
+                .setMemberService(memberServiceImpl);
+    }
 
+    @Bean
+    MemberService idConversionMemberService(){
+
+        return new IdConversionMemberService();
+    }
+
+    @Bean
+    MemberService consistencyMemberService(){
+
+        return new ConsistencyMemberService(certificationEmailRepository, memberRepository, teamRepository);
+    }
 
 
 }

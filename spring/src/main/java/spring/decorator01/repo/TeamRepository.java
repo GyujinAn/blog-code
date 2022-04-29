@@ -1,6 +1,7 @@
 package spring.decorator01.repo;
 
-import org.springframework.stereotype.Component;
+
+import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import java.util.HashSet;
@@ -10,7 +11,7 @@ import java.util.Set;
  * @author agj017@gmail.com
  * @since 2022/04/28
  */
-@Component
+@Repository
 public class TeamRepository {
 
     Set<String> teams = new HashSet();

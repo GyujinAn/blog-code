@@ -10,4 +10,7 @@ public interface MemberService {
 
     Member save(Member member) throws Exception;
 
+    default MemberService setMemberService(MemberService memberService){
+        return this;
+    }
 }

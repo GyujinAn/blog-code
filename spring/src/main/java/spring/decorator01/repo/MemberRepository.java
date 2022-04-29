@@ -1,6 +1,7 @@
 package spring.decorator01.repo;
 
-import org.springframework.stereotype.Component;
+
+import org.springframework.stereotype.Repository;
 import spring.decorator01.Member;
 
 import java.util.HashMap;
@@ -10,7 +11,7 @@ import java.util.Map;
  * @author agj017@gmail.com
  * @since 2022/04/28
  */
-@Component
+@Repository
 public class MemberRepository {
 
     Map<String, Member> members = new HashMap();

@@ -14,7 +14,7 @@ import spring.decorator01.repo.TeamRepository;
 @RequiredArgsConstructor
 public class ConsistencyMemberService implements DecorateMemberService{
 
-    private final MemberService memberService;
+    private MemberService memberService;
 
     private final CertificationEmailRepository certificationEmailRepository;
 
@@ -40,4 +40,8 @@ public class ConsistencyMemberService implements DecorateMemberService{
         return memberService.save(member);
     }
 
+    public MemberService setMemberService(MemberService memberService) {
+        this.memberService = memberService;
+        return this;
+    }
 }

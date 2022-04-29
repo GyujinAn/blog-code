@@ -11,7 +11,7 @@ import spring.decorator01.Member;
 @RequiredArgsConstructor
 public class IdConversionMemberService implements DecorateMemberService{
 
-    private final MemberService memberService;
+    private MemberService memberService;
 
     @Override
     public Member save(Member member) throws Exception {
@@ -23,5 +23,10 @@ public class IdConversionMemberService implements DecorateMemberService{
             member.setLoginId(member.getEmail());
 
         return memberService.save(member);
+    }
+
+    public MemberService setMemberService(MemberService memberService) {
+        this.memberService = memberService;
+        return this;
     }
 }
