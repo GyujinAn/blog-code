@@ -1,12 +1,12 @@
 package spring.decorator01;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import spring.decorator01.svc.MemberService;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author agj017@gmail.com
@@ -23,16 +23,16 @@ public class MemberController {
 
     private final MemberService consistencyMemberServiceImpl;
 
-    private final MemberService idConversionMemberServiceImpl;
 
     @PostMapping
-    public String singUp(Member member){
+    public String singUp(@RequestBody Member member, HttpServletResponse httpServletResponse){
 
         try {
             memberService.save(member);
             return "회원가입 성공";
         } catch (Exception e) {
             e.printStackTrace();
+            httpServletResponse.setStatus(400);
             return "회원가입 실패: " + e.getMessage();
         }
     }
@@ -47,15 +47,10 @@ public class MemberController {
         this.setMemberService(consistencyMemberServiceImpl);
     }
 
-    @PutMapping("/config/idconversion")
-    public void setIdConversion(){
-        this.setMemberService(idConversionMemberServiceImpl);
-    }
-
+    @Autowired
     @Qualifier("memberServiceImpl")
     public void setMemberService(MemberService memberService) {
         this.memberService = memberService;
     }
-
 
 }

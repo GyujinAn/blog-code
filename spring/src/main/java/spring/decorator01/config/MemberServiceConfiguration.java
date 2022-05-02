@@ -1,4 +1,4 @@
-package spring.decorator01;
+package spring.decorator01.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -34,36 +34,13 @@ public class MemberServiceConfiguration {
     @Bean
     MemberService idConversionConsistencyMemberServiceImpl(){
 
-        return idConversionMemberService()
-                .setMemberService(
-                        consistencyMemberService()
-                        .setMemberService(memberServiceImpl)
-                );
+        return new IdConversionMemberService(consistencyMemberServiceImpl());
     }
 
     @Bean
     MemberService consistencyMemberServiceImpl(){
 
-        return consistencyMemberService()
-                .setMemberService(memberServiceImpl);
-    }
-
-    @Bean
-    MemberService idConversionMemberServiceImpl(){
-        return idConversionMemberService()
-                .setMemberService(memberServiceImpl);
-    }
-
-    @Bean
-    MemberService idConversionMemberService(){
-
-        return new IdConversionMemberService();
-    }
-
-    @Bean
-    MemberService consistencyMemberService(){
-
-        return new ConsistencyMemberService(certificationEmailRepository, memberRepository, teamRepository);
+        return new ConsistencyMemberService(memberServiceImpl, certificationEmailRepository, memberRepository, teamRepository);
     }
 
 
