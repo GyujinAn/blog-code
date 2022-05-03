@@ -16,11 +16,10 @@ public class StringLenthMemberService implements DecorateMemberService{
 
     @Override
     public String save(Member member) {
-
         if(member.memberName.length() > MEMBER_NAME_MAX_LENGTH){
             return "Too long member name";
         }
         return memberService.save(member);
-
     }
+
 }

@@ -13,9 +13,8 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public String save(Member member) {
-
         memberStorage.put(member.getMemberName(), member);
-
         return "Save successfully";
     }
+
 }

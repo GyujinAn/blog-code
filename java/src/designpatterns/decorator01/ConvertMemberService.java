@@ -14,7 +14,6 @@ public class ConvertMemberService implements DecorateMemberService {
 
     @Override
     public String save(Member member) {
-
         if(member.gender.equals("남")){
             member.setGender("M");
         } else if(member.gender.equals("여")){
@@ -22,7 +21,6 @@ public class ConvertMemberService implements DecorateMemberService {
         } else {
             return "Invalid member gender";
         }
-
         return memberService.save(member);
     }
 

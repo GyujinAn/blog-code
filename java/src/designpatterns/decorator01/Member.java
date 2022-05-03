@@ -25,4 +25,5 @@ public class Member {
     public void setGender(String gender) {
         this.gender = gender;
     }
+
 }
