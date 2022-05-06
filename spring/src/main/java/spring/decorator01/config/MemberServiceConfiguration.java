@@ -33,15 +33,11 @@ public class MemberServiceConfiguration {
 
     @Bean
     MemberService idConversionConsistencyMemberServiceImpl(){
-
         return new IdConversionMemberService(consistencyMemberServiceImpl());
     }
 
     @Bean
     MemberService consistencyMemberServiceImpl(){
-
         return new ConsistencyMemberService(memberServiceImpl, certificationEmailRepository, memberRepository, teamRepository);
     }
-
-
 }
