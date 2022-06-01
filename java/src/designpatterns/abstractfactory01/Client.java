@@ -1,18 +1,35 @@
 package designpatterns.abstractfactory01;
 
 public class Client {
-    public static void main(String[] args) {
-        AbstractFactory abstractFactory1 = new ConcreteFactory1();
 
-        AbstractFactory abstractFactory2 = new ConcreteFactory2();
+    AbstractProductA abstractProductA;
+    AbstractProductB abstractProductB;
+    AbstractFactory abstractFactory;
+    public Client(AbstractFactory abstractFactory) {
+        this.abstractFactory = abstractFactory;
+    }
 
-        Server server1 = new Server(abstractFactory1);
+    void process(){
 
-        Server server2 = new Server(abstractFactory2);
+        createProduct();
 
-        server1.process();
+        abstractProductA.firstMethodInProductA();
 
-        server2.process();
+        abstractProductA.secondMethodInProductA();
+
+        abstractProductB.firstMethodInProductB();
+
+        abstractProductB.secondMethodInProductB();
 
     }
+
+    private void createProduct(){
+
+        abstractProductA = abstractFactory.createProductA();
+
+        abstractProductB = abstractFactory.createProductB();
+
+    }
+
+
 }
