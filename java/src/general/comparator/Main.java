@@ -1,4 +1,4 @@
-package designpatterns.strategy02;
+package general.comparator;
 
 import java.util.ArrayList;
 import java.util.Collections;
