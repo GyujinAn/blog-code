@@ -5,6 +5,10 @@ spring:
     username: root
     password:
 
+  redis:
+    host: localhost
+    port: 6379
+
   kafka:
     consumer:
       bootstrap-servers: localhost:9092
@@ -17,7 +21,12 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
-
 logging:
   level:
     root: debug
+
+server:
+  servlet:
+    session:
+      cookie:
+        name: myId

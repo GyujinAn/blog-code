@@ -70,7 +70,4 @@ public class Main {
 
         list.stream().forEach(System.out::println);
     }
-
-
-
 }
