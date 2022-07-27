@@ -1,4 +1,4 @@
-package spring.kafka.producer;
+package springforapachekafka.producer;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

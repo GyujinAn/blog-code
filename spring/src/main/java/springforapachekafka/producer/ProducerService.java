@@ -1,4 +1,4 @@
-package spring.kafka.producer;
+package springforapachekafka.producer;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

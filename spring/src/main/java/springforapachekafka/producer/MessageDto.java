@@ -1,4 +1,4 @@
-package spring.kafka.producer;
+package springforapachekafka.producer;
 
 import lombok.Getter;
 import org.hibernate.annotations.GeneratorType;

@@ -1,9 +1,9 @@
-package spring.redis;
+package springsession.redis;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
-import spring.cookiesession.CookieSessionSampleApplication;
+import springmvc.cookiesession.CookieSessionSampleApplication;
 
 @EnableRedisHttpSession
 @SpringBootApplication
