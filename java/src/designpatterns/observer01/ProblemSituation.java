@@ -47,6 +47,8 @@ class ProblemNewsStation{
         problemMailSender.update(title, contents);
         problemMessageSender.update(title, contents);
         problemFaxSender.update(title, contents);
+        // 아래와 같이 만약 다른 Sender가 추가된다면 코드를 수정하고 다시 컴파일 해야된다. OCP 위반이다.
+        // problemOtherSender.update(title, contents);
     }
 }
 
