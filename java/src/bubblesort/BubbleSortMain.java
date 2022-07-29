@@ -1,4 +1,4 @@
-package algorithm.bubblesort;
+package bubblesort;
 
 /**
  * @author agj017@gmail.com
