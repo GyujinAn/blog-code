@@ -1,6 +1,6 @@
-package queue;
+package datastructure.queue;
 
-public class CircularQueue {
+public class Queue {
 
     private int [] arr;
 
@@ -12,8 +12,7 @@ public class CircularQueue {
 
     private final int QUEUE_SIZE = 8;
 
-
-    public CircularQueue() {
+    public Queue() {
         this.arr = new int [QUEUE_SIZE];
         this.front = 0;
         this.rear = 0;
@@ -22,7 +21,7 @@ public class CircularQueue {
 
     public void enqueue(int value) throws Exception {
         if(rear == QUEUE_SIZE)
-            rear = 0;
+            compact();
 
         arr[rear] = value;
         rear++;
@@ -32,10 +31,7 @@ public class CircularQueue {
 
     public int dequeue() throws Exception {
         if(front == rear)
-            throw new Exception("empty queue");
-
-        if(front == QUEUE_SIZE)
-            front = 0;
+            throw new Exception("empty datastructure.queue");
 
         int value = arr[front];
         front++;
@@ -44,20 +40,28 @@ public class CircularQueue {
         return value;
     }
 
+    private void compact() throws Exception {
+        if(front == 0)
+            throw new Exception("full datastructure.queue");
+
+        int oldFront = front;
+        for(int i = 0; i < capable; i++){
+            arr[i] = arr[oldFront];
+            oldFront++;
+        }
+
+        front = 0;
+        rear = capable;
+    }
+
+
     public void print() {
 
-        System.out.print("CircularQueue{ ");
-
-        int i = front;
-        do{
-            if(i == QUEUE_SIZE)
-                i = 0;
-
+        System.out.print("Queue{ ");
+        for(int i = front; i < rear; i++){
             System.out.print(arr[i] + " ");
-            i++;
-        }while (i != rear);
+        }
         System.out.println("}");
 
     }
-
 }

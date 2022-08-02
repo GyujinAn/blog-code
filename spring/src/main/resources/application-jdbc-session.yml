@@ -1,0 +1,7 @@
+spring:
+  config:
+    activate:
+      on-profile: "jdbc-session"
+
+  session:
+    store-type: jdbc
