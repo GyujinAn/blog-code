@@ -1,4 +1,4 @@
-package springmvc.cookiesession;
+package springweb.cookiesession;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

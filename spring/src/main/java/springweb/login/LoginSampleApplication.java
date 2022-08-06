@@ -1,4 +1,4 @@
-package springmvc.login;
+package springweb.login;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
@@ -7,31 +7,31 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import springmvc.login.domain.Role;
-import springmvc.login.domain.User;
-import springmvc.login.domain.UserRepository;
+import springweb.login.domain.Role;
+import springweb.login.domain.User;
+import springweb.login.domain.UserRepository;
 
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class, OAuth2ClientAutoConfiguration.class})
 public class LoginSampleApplication {
 
-    @Autowired
-    UserRepository userRepository;
+//    @Autowired
+//    UserRepository userRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(LoginSampleApplication.class);
     }
 
 
-    @Bean
-    public ApplicationRunner applicationRunner() {
-
-        return args -> userRepository.save(User.builder()
-                .email("sample@sample.com")
-                .pw("sample")
-                .role(Role.GUEST)
-                .build());
-
-    }
+//    @Bean
+//    public ApplicationRunner applicationRunner() {
+//
+//        return args -> userRepository.save(User.builder()
+//                .email("sample@sample.com")
+//                .pw("sample")
+//                .role(Role.GUEST)
+//                .build());
+//
+//    }
 
 }

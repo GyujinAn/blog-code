@@ -1,15 +1,16 @@
-package springmvc.login.service;
+package springweb.login.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import springmvc.login.config.web.SessionUser;
-import springmvc.login.controller.LoginRequestDto;
-import springmvc.login.domain.User;
-import springmvc.login.domain.UserRepository;
+import springweb.login.config.web.SessionUser;
+import springweb.login.domain.User;
+import springweb.login.domain.UserRepository;
 
+@RequiredArgsConstructor
 @Service
 public class LoginService {
 
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public SessionUser login(String email, String pw){
         User user = userRepository.findByEmail(email)

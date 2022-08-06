@@ -1,4 +1,4 @@
-package springmvc.login.config.web;
+package springweb.login.config.web;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;

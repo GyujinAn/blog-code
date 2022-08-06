@@ -1,4 +1,4 @@
-package springmvc.login.domain;
+package springweb.login.domain;
 
 import lombok.Builder;
 import lombok.Getter;

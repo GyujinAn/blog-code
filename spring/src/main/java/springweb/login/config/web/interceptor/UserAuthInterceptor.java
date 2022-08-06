@@ -1,9 +1,9 @@
-package springmvc.login.config.web.interceptor;
+package springweb.login.config.web.interceptor;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-import springmvc.login.config.web.SessionUser;
-import springmvc.login.domain.Role;
+import springweb.login.config.web.SessionUser;
+import springweb.login.domain.Role;
 
 
 import javax.servlet.http.HttpServletRequest;

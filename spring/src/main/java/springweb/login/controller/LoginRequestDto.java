@@ -1,4 +1,4 @@
-package springmvc.login.controller;
+package springweb.login.controller;
 
 import lombok.Getter;
 
