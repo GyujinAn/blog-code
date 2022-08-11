@@ -9,11 +9,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @RequiredArgsConstructor
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-
     private final HandlerInterceptor guestAuthInterceptor;
-
     private final HandlerInterceptor userAuthInterceptor;
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 
@@ -26,5 +23,4 @@ public class WebConfig implements WebMvcConfigurer {
                 .addPathPatterns("/test/user")
                 .excludePathPatterns();
     }
-
-    }
+}
