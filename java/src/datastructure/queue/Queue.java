@@ -3,13 +3,9 @@ package datastructure.queue;
 public class Queue {
 
     private int [] arr;
-
     private int front;
-
     private int rear;
-
     private int capable;
-
     private final int QUEUE_SIZE = 8;
 
     public Queue() {

@@ -3,15 +3,10 @@ package datastructure.queue;
 public class CircularQueue {
 
     private int [] arr;
-
     private int front;
-
     private int rear;
-
     private int capable;
-
     private final int QUEUE_SIZE = 8;
-
 
     public CircularQueue() {
         this.arr = new int [QUEUE_SIZE];

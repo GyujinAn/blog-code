@@ -37,7 +37,6 @@ public class Main {
             queue.enqueue(88);
             queue.enqueue(45);
             queue.print();
-            System.out.println(queue);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
