@@ -10,10 +10,18 @@ public class SortHashMapMain {
         map.put("a", 3);
         map.put("b", 2);
         map.put("c", 1);
+        map.put("d", 5);
+        map.put("e", 6);
+        map.put("f", 9);
 
         List list = sortMap(map);
-
         System.out.println(list.toString());
+
+        List list1 = customSortMapUsingAnonymousObj(map);
+        System.out.println(list1);
+
+        List list2 = customSortMapUsingLambda(map);
+        System.out.println(list2);
 
     }
 
@@ -29,7 +37,7 @@ public class SortHashMapMain {
         list.sort(new Comparator<Map.Entry<String, Integer>>() {
             @Override
             public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-                return o1.getValue() - o2.getValue();
+                return o2.getValue() - o1.getValue();
             }
         });
         return list;
@@ -38,7 +46,7 @@ public class SortHashMapMain {
     private static List customSortMapUsingLambda(Map map){
         List<Map.Entry<String, Integer>> list = new LinkedList<>(map.entrySet());
         list.sort(
-                (o1, o2) -> o1.getValue() - o2.getValue()
+                (o1, o2) -> o2.getValue() - o1.getValue()
         );
         return list;
     }
