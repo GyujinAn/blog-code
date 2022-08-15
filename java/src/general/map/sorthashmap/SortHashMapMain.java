@@ -24,7 +24,7 @@ public class SortHashMapMain {
         return list;
     }
 
-    private static List customSortMap(Map map){
+    private static List customSortMapUsingAnonymousObj(Map map){
         List<Map.Entry<String, Integer>> list = new LinkedList<>(map.entrySet());
         list.sort(new Comparator<Map.Entry<String, Integer>>() {
             @Override
@@ -35,7 +35,7 @@ public class SortHashMapMain {
         return list;
     }
 
-    private static List cleanCustomEntryMethod(Map map){
+    private static List customSortMapUsingLambda(Map map){
         List<Map.Entry<String, Integer>> list = new LinkedList<>(map.entrySet());
         list.sort(
                 (o1, o2) -> o1.getValue() - o2.getValue()
