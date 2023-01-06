@@ -1,0 +1,4 @@
+package authenticationauthorization.usingjwtwithidpsinspring.application
+
+class CreateAccountUseCase {
+}
