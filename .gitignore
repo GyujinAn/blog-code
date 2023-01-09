@@ -28,3 +28,4 @@ hs_err_pid*
 JavaTest.java
 out/
 application-local.yml
+node_modules/
