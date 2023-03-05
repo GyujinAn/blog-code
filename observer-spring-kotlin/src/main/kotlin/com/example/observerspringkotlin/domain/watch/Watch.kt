@@ -3,7 +3,6 @@ package com.example.observerspringkotlin.domain.watch
 import com.example.observerspringkotlin.infrastructure.StateData
 import com.example.observerspringkotlin.infrastructure.event.EventPublisher
 import java.lang.Exception
-import java.util.EventListener
 import java.util.UUID
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -25,6 +24,12 @@ class Watch (
 
     @Column
     var location: Location = Location.SAFE_AREA,
+
+    @Column
+    var modeStatus: ModeStatus,
+
+    @Column
+    var watchConditionStatus: WatchConditionStatus,
 ) {
     fun updateState(stateData: StateData) {
         if (this.id != stateData.watchId) {
@@ -46,8 +51,24 @@ class Watch (
         location = stateData.location
 
     }
+
+    fun changeToLowPowerMode() {
+        this.modeStatus = ModeStatus.LOW_POWER_MODE
+    }
+
+    fun changeToNeedToBeRepairedStatus() {
+        this.watchConditionStatus = WatchConditionStatus.NEED_TO_BE_REPAIRED
+    }
 }
 
 enum class Location {
     SAFE_AREA, DANGER_AREA
+}
+
+enum class ModeStatus {
+    NORMAL, LOW_POWER_MODE
+}
+
+enum class WatchConditionStatus {
+    NORMAL, NEED_TO_BE_REPAIRED
 }

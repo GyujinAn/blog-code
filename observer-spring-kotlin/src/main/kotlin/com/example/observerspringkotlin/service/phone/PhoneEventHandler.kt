@@ -19,15 +19,15 @@ class PhoneEventHandler (
     fun handle (event: LowedSocEvent) {
         val watch = watchRepository.findByIdOrNull(event.watchId) ?: throw Exception()
         val phone = phoneRepository.findByIdOrNull(watch.phoneId) ?: throw Exception()
-        phone.changeToLowPowerMode()
-        phone.alertToUser("batter is low. you should charge battery.")
+        watch.changeToLowPowerMode()
+        phone.alertToUser("watch batter is low. you should charge battery.")
     }
 
     @EventListener(LowedSohEvent::class)
     fun handle (event: LowedSohEvent) {
         val watch = watchRepository.findByIdOrNull(event.watchId) ?: throw Exception()
         val phone = phoneRepository.findByIdOrNull(watch.phoneId) ?: throw Exception()
-        phone.changeToNeedToBeRepairedStatus()
+        watch.changeToNeedToBeRepairedStatus()
         phone.alertToUser("you should go repair shop.")
     }
 
@@ -35,7 +35,7 @@ class PhoneEventHandler (
     fun handle (event: MovedDangerAreaEvent) {
         val watch = watchRepository.findByIdOrNull(event.watchId) ?: throw Exception()
         val phone = phoneRepository.findByIdOrNull(watch.phoneId) ?: throw Exception()
-        phone.alertToUser("you should go repair shop.")
+        phone.alertToUser("you are in danger area.")
     }
 
     @EventListener(ChangedEmergencyStatusEvent::class)
