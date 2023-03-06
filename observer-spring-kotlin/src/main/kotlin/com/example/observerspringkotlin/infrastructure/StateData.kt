@@ -5,10 +5,10 @@ import java.util.UUID
 
 class StateData(
     val userId: UUID,
-    val bloodPressure: Int,
-    val oxygenSaturation: Int,
+    var bloodPressure: Int = 100,
+    var oxygenSaturation: Int = 95,
     val watchId: UUID,
-    val soc: Int,
-    val soh: Int,
-    val location: Location,
+    var soc: Int = 0,
+    var soh: Int = 0,
+    var location: Location = Location.SAFE_AREA,
 )

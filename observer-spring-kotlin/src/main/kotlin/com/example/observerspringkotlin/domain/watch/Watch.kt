@@ -11,7 +11,7 @@ import javax.persistence.Id
 @Entity
 class Watch (
     @Id
-    val id: UUID,
+    val id: UUID = UUID.randomUUID(),
 
     @Column
     var soc: Int = 0,
@@ -26,20 +26,20 @@ class Watch (
     var location: Location = Location.SAFE_AREA,
 
     @Column
-    var modeStatus: ModeStatus,
+    var modeStatus: ModeStatus = ModeStatus.NORMAL,
 
     @Column
-    var watchConditionStatus: WatchConditionStatus,
+    var watchConditionStatus: WatchConditionStatus = WatchConditionStatus.NORMAL,
 ) {
     fun updateState(stateData: StateData) {
         if (this.id != stateData.watchId) {
             throw Exception()
         }
 
-        if (stateData.soc < 20) {
+        if (stateData.soc == 20) {
             EventPublisher.publish(LowedSocEvent(stateData.watchId, stateData.soc))
         }
-        if (stateData.soh < 10) {
+        if (stateData.soh == 10) {
             EventPublisher.publish(LowedSohEvent(stateData.watchId, stateData.soh))
         }
         if (stateData.location == Location.DANGER_AREA) {

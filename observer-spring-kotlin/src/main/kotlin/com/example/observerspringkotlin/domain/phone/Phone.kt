@@ -8,12 +8,12 @@ import javax.persistence.Id
 @Entity
 class Phone (
     @Id
-    val id: UUID,
+    val id: UUID = UUID.randomUUID(),
 
     @Column
     var userId: UUID,
 
-) {
+    ) {
     fun alertToUser(s: String) {
         println(s)
     }

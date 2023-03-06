@@ -9,20 +9,20 @@ import javax.persistence.Entity
 import javax.persistence.Id
 
 @Entity
-class User (
+class Users (
     @Id
-    val id: UUID,
+    val id: UUID = UUID.randomUUID(),
 
     @Column
-    var bloodPressure: Int,
+    var bloodPressure: Int = 100,
 
     @Column
-    var oxygenSaturation: Int,
+    var oxygenSaturation: Int = 100,
 
     @Column
-    var healthStatus: HealthStatus,
+    var healthStatus: HealthStatus = HealthStatus.GOOD,
 
-) {
+    ) {
     fun updateState(stateData: StateData) {
         if (this.id != stateData.userId) {
             throw Exception()
