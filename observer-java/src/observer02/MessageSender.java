@@ -1,10 +1,10 @@
-package designpatterns.observer02;
+package observer02;
 
 /**
  * @author agj017@gmail.com
  * @since 2022/03/29
  */
-public class FaxSender implements Observer{
+public class MessageSender implements Observer{
 
     String title;
 
@@ -17,14 +17,14 @@ public class FaxSender implements Observer{
             NewsStation newsStation = (NewsStation) subject;
             title = newsStation.getTitle();
             contents = newsStation.getContents();
-            sendFax();
+            sendMessage();
         }
 
     }
 
-    private void sendFax(){
+    private void sendMessage(){
 
-        System.out.println("---팩스전송---");
+        System.out.println("---문자전송---");
         System.out.println("제목: " + title);
         System.out.println("내용: " + contents);
 

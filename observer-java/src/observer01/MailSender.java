@@ -1,4 +1,4 @@
-package designpatterns.observer01;
+package observer01;
 
 /**
  * @author agj017@gmail.com

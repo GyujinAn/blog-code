@@ -1,4 +1,4 @@
-package designpatterns.observer02;
+package observer01;
 
 /**
  * @author agj017@gmail.com
@@ -6,6 +6,6 @@ package designpatterns.observer02;
  */
 public interface Observer {
 
-    void update(Subject subject);
+    void update(String title, String contents);
 
 }
