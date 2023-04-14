@@ -29,4 +29,7 @@ JavaTest.java
 out/
 application-local.yml
 node_modules/
+
 .DS_Store
+firebase-service-account.json
+
