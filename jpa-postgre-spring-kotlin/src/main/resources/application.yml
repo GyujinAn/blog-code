@@ -1,0 +1,10 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        ddl-auto: create-drop
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/play-ground
+
