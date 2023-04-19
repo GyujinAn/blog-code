@@ -26,7 +26,10 @@ class JpaEntity(
 
     @Type(type = "jsonb")
     @Column(name = "jsonb2", columnDefinition = "jsonb")
-    private var jsonb2: Any = Jsonb()
+    private var jsonb2: Any = Jsonb(),
+
+    @Column
+    var discription: String = "hello world",
 
 )
 
