@@ -14,7 +14,7 @@ internal class JpaServiceTest {
 
     @Test
     fun saveJpaService() {
-        val jpaEntity = jpaService.saveJpaService()
+        val jpaEntity = jpaService.saveJpaDefaultEntity()
 
         val actual = jpaEntityRepository.findByIdOrNull(jpaEntity.id)
 

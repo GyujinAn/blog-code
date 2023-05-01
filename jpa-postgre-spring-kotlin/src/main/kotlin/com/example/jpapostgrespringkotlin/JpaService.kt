@@ -8,7 +8,7 @@ class JpaService(
     private val jpaEntityRepository: JpaEntityRepository
 ) {
     @Transactional
-    fun saveJpaService(): JpaEntity {
+    fun saveJpaDefaultEntity(): JpaEntity {
         return jpaEntityRepository.save(JpaEntity())
     }
 }
