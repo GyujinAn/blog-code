@@ -24,7 +24,7 @@ dependencies {
 	implementation("com.vladmihalcea:hibernate-types-52:2.14.+")
 	runtimeOnly("org.postgresql:postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-//	implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.8")
+	implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.8")
 
 }
 
