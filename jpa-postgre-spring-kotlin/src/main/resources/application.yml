@@ -2,9 +2,13 @@ spring:
   jpa:
     properties:
       hibernate:
-        ddl-auto: create-drop
+        ddl-auto: update
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        show-sql: true
     generate-ddl: true
   datasource:
     url: jdbc:postgresql://localhost:5432/play-ground
 
+logging:
+  level:
+    root: info
