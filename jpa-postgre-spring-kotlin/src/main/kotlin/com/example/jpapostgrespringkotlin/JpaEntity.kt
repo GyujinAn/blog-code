@@ -1,5 +1,6 @@
 package com.example.jpapostgrespringkotlin
 
+import com.fasterxml.jackson.databind.BeanDescription
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType
 import java.util.UUID
 import javax.persistence.Column
@@ -19,6 +20,9 @@ import org.hibernate.annotations.TypeDef
 class JpaEntity(
     @Id
     val id: UUID = UUID.randomUUID(),
+
+    @Column
+    var description: String = "hello world",
 
     @Type(type = "jsonb")
     @Column(name = "jsonb1", columnDefinition = "jsonb")
