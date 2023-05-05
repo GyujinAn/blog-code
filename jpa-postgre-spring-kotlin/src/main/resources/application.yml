@@ -5,12 +5,6 @@ spring:
         ddl-auto: create-drop
         dialect: org.hibernate.dialect.PostgreSQLDialect
     generate-ddl: true
-    show-sql: true
   datasource:
     url: jdbc:postgresql://localhost:5432/play-ground
 
-
-#logging:
-#  level:
-#    root: info
-#    org.hibernate: trace
