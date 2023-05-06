@@ -2,6 +2,7 @@ import argparse
 import firebase_admin
 from firebase_admin import auth
 
+
 def update_user_password(email, password):
     # initialize the Firebase Admin SDK
     cred = firebase_admin.credentials.Certificate('')
@@ -12,6 +13,7 @@ def update_user_password(email, password):
 
     # update the user's password
     auth.update_user(user.uid, password=password)
+
 
 if __name__ == '__main__':
     # create an ArgumentParser object
