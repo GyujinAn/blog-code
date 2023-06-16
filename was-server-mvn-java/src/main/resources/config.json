@@ -1,0 +1,23 @@
+{
+  "port": 80,
+  "hosts": [
+    {
+      "name": "hello.com",
+      "directory": "hello",
+      "fileName403": "hello403.html",
+      "fileName404": "hello404.html",
+      "fileName500": "hello500.html"
+    },
+    {
+      "name": "world.com",
+      "directory": "world",
+      "fileName403": "world403.html",
+      "fileName404": "world404.html",
+      "fileName500": "world500.html"
+    }
+  ],
+  "mappings": {
+    "/Greeting" : "org.httpserver.servlet.impl.Hello",
+    "/super.Greeting" : "org.httpserver.servlet.impl.service.Hello"
+  }
+}
