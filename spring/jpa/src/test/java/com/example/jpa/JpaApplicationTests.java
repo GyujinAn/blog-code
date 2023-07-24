@@ -1,10 +1,10 @@
-package com.example.springaop;
+package com.example.jpa;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringAopApplicationTests {
+class JpaApplicationTests {
 
 	@Test
 	void contextLoads() {
