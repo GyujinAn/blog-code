@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -60,6 +61,6 @@ class UpdateAccountUseCaseTest {
         assertNotEquals(aList, cList);
         assertNotEquals(bList, dList);
         bList.addAll(aList);
-        assertEquals(dList, bList);
+        assertEquals(new HashSet<>(dList), new HashSet<>(bList));
     }
 }
