@@ -8,11 +8,23 @@ import java.util.Objects;
 
 @Entity
 public class Account {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
-
     public Long organizationId;
+
+    public String name;
+
+    public Account() {
+
+    }
+
+    public Account(Long id, Long organizationId, String name) {
+        this.id = id;
+        this.organizationId = organizationId;
+        this.name = name;
+    }
 
     @Override
     public boolean equals(Object o) {

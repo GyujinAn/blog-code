@@ -1,9 +1,12 @@
 package com.example.jpa.cashing;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.List;
@@ -11,7 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class UpdateAccountUseCaseTest {
+class JpaCashingTest {
 
     @Autowired
     AccountRepository accountRepository;
@@ -19,9 +22,18 @@ class UpdateAccountUseCaseTest {
     @Autowired
     OrganizationRepository organizationRepository;
 
+    @Autowired
+    EntityManager entityManager;
+
+    @BeforeEach
+    void init() {
+        accountRepository.deleteAll();
+        organizationRepository.deleteAll();
+    }
+
     @Transactional
     @Test
-    void after_updating_in_cash_read_sql_send_again() {
+    void send_sql_statement_to_DB_after_updating_in_cash() {
         // given
         Organization aOrganization = organizationRepository.save(
                 new Organization()
@@ -51,8 +63,7 @@ class UpdateAccountUseCaseTest {
         }
 
         // when
-        System.out.println("start");
-        // the sql statement should be sent to DB
+        System.out.println("the sql statement should be sent to DB");
         List<Account> cList = accountRepository.findAllByOrganizationId(aOrganization.id);
         List<Account> dList = accountRepository.findAllByOrganizationId(bOrganization.id);
         System.out.println("end");
@@ -62,5 +73,30 @@ class UpdateAccountUseCaseTest {
         assertNotEquals(bList, dList);
         bList.addAll(aList);
         assertEquals(new HashSet<>(dList), new HashSet<>(bList));
+    }
+
+    @Transactional
+    @Test
+    public void override_for_duplicated_pk() {
+        // given
+        Long duplicatedPk = 1L;
+        String name = "hello";
+        Account orignalAccount = new Account(duplicatedPk, 1L, name);
+        accountRepository.save(orignalAccount);
+        entityManager.flush();
+        entityManager.clear();
+
+        // when
+        Account account = new Account(duplicatedPk, 2L, "world");
+        accountRepository.save(account);
+        System.out.println("the sql statement which update account pk1 should be sent");
+        entityManager.flush();
+        entityManager.clear();
+        System.out.println();
+
+        // then
+        List<Account> accounts = accountRepository.findAll();
+        assertEquals(1, accounts.size());
+        assertEquals("world", accounts.get(0).name);
     }
 }
