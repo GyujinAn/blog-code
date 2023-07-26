@@ -5,22 +5,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 public class Account {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
-    public Long organizationId;
+    public UUID id;
+    public UUID organizationId;
 
     public String name;
 
     public Account() {
-
+        id = UUID.randomUUID();
     }
 
-    public Account(Long id, Long organizationId, String name) {
+    public Account(UUID id, UUID organizationId, String name) {
         this.id = id;
         this.organizationId = organizationId;
         this.name = name;

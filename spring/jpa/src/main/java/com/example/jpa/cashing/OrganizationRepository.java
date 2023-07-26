@@ -2,5 +2,7 @@ package com.example.jpa.cashing;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface OrganizationRepository extends JpaRepository<Organization, Long> {
+import java.util.UUID;
+
+public interface OrganizationRepository extends JpaRepository<Organization, UUID> {
 }

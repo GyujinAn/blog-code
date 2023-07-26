@@ -1,6 +1,5 @@
 package com.example.jpa.cashing;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -79,15 +79,14 @@ class JpaCashingTest {
     @Test
     public void override_for_duplicated_pk() {
         // given
-        Long duplicatedPk = 1L;
-        String name = "hello";
-        Account orignalAccount = new Account(duplicatedPk, 1L, name);
+        UUID duplicatedPk = UUID.randomUUID();
+        Account orignalAccount = new Account(duplicatedPk, UUID.randomUUID(), "hello");
         accountRepository.save(orignalAccount);
         entityManager.flush();
         entityManager.clear();
 
         // when
-        Account account = new Account(duplicatedPk, 2L, "world");
+        Account account = new Account(duplicatedPk, UUID.randomUUID(), "world");
         accountRepository.save(account);
         System.out.println("the sql statement which update account pk1 should be sent");
         entityManager.flush();

@@ -1,9 +1,8 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:test
-    username: sa
+    url: jdbc:postgresql://localhost:5432/play-ground
+    username:
     password:
-    driver-class-name: org.h2.Driver
 
   jpa:
     hibernate:
@@ -12,3 +11,8 @@ spring:
       hibernate:
         format_sql: true
 
+h2-datasource:
+  url: jdbc:h2:mem:test
+  username: sa
+  password:
+  driver-class-name: org.h2.Driver
