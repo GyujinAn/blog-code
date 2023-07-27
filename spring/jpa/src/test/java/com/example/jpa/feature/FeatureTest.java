@@ -1,17 +1,18 @@
 package com.example.jpa.feature;
 
-import com.example.jpa.cashing.Account;
-import com.example.jpa.cashing.AccountRepository;
-import com.example.jpa.cashing.OrganizationRepository;
+import com.example.jpa.Account;
+import com.example.jpa.AccountRepository;
+import com.example.jpa.OrganizationRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
-import javax.persistence.EntityManager;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
+@ActiveProfiles("dev")
 public class FeatureTest {
     @Autowired
     AccountRepository accountRepository;

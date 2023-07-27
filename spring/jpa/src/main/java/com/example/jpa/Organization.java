@@ -1,4 +1,4 @@
-package com.example.jpa.cashing;
+package com.example.jpa;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

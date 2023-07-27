@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import javax.sql.DataSource;
 
@@ -12,20 +13,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest
-public class DefaultDataSourceConfigTest {
-
-    @Autowired
-    private DataSource dataSource;
+@ActiveProfiles("dev")
+public class DevProfileConfigTest {
 
     @Value("${spring.datasource.url}")
     private String url;
 
-    @Value("${spring.datasource.username}")
-    private String username;
-
-    @Value("${spring.datasource.password}")
-    private String password;
-
+    @Autowired
+    private DataSource dataSource;
 
     @Test
     public void should_be_postgres_data_source() {

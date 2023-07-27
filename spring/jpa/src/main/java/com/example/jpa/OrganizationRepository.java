@@ -1,4 +1,4 @@
-package com.example.jpa.cashing;
+package com.example.jpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

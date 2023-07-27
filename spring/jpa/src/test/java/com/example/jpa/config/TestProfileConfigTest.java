@@ -1,10 +1,12 @@
 package com.example.jpa.config;
 
+import com.example.jpa.Account;
+import com.example.jpa.AccountRepository;
+import com.zaxxer.hikari.HikariDataSource;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.test.context.ActiveProfiles;
 
 import javax.sql.DataSource;
@@ -12,27 +14,31 @@ import javax.sql.DataSource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-@ActiveProfiles("h2-datasource")
-public class H2DataSourceProfileTest {
-    @Autowired
-    private DataSource dataSource;
+@ActiveProfiles("test")
+public class TestProfileConfigTest {
 
-    @Value("${h2-datasource.url}")
+    @Value("${spring.datasource.url}")
     private String url;
 
-    @Value("${h2-datasource.username}")
+    @Value("${spring.datasource.username}")
     private String username;
 
-    @Value("${h2-datasource.password}")
+    @Value("${spring.datasource.password}")
     private String password;
+
+    @Autowired
+    private AccountRepository accountRepository;
+
+    @Autowired
+    private DataSource dataSource;
 
     @Test
     public void should_be_h2_data_source() {
         // given
 
         // when
-        DriverManagerDataSource driverManagerDataSource = (DriverManagerDataSource) dataSource;
-        String urlOfDataSource = driverManagerDataSource.getUrl();
+        HikariDataSource driverManagerDataSource = (HikariDataSource) dataSource;
+        String urlOfDataSource = driverManagerDataSource.getJdbcUrl();
         String usernameOfDataSource = driverManagerDataSource.getUsername();
         String passwordOfDataSource = driverManagerDataSource.getPassword();
 
@@ -40,5 +46,16 @@ public class H2DataSourceProfileTest {
         assertEquals(url, urlOfDataSource);
         assertEquals(username, usernameOfDataSource);
         assertEquals(password, passwordOfDataSource);
+    }
+
+    @Test
+    public void save_data_to_H2() {
+        // given
+        Account account = new Account();
+
+        // when
+        accountRepository.save(account);
+
+        // then
     }
 }

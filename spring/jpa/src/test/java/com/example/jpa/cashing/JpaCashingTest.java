@@ -1,9 +1,14 @@
 package com.example.jpa.cashing;
 
+import com.example.jpa.Account;
+import com.example.jpa.AccountRepository;
+import com.example.jpa.Organization;
+import com.example.jpa.OrganizationRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -14,6 +19,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@ActiveProfiles("dev")
 class JpaCashingTest {
 
     @Autowired
