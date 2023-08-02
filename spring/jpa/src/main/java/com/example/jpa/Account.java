@@ -1,5 +1,6 @@
 package com.example.jpa;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Objects;
@@ -9,6 +10,7 @@ import java.util.UUID;
 public class Account {
 
     @Id
+    @Column(columnDefinition = "binary(16)")
     public UUID id;
     public UUID organizationId;
 

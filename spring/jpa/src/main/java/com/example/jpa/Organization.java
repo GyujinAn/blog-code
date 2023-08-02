@@ -1,5 +1,6 @@
 package com.example.jpa;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,7 +9,9 @@ import java.util.UUID;
 
 @Entity
 public class Organization {
+
     @Id
+    @Column(columnDefinition = "binary(16)")
     public UUID id;
 
     public Organization() {
