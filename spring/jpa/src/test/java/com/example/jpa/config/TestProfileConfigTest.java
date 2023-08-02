@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-@ActiveProfiles("test")
+@ActiveProfiles("h2")
 public class TestProfileConfigTest {
 
     @Value("${spring.datasource.url}")

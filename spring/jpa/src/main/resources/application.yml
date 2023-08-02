@@ -1,7 +1,7 @@
 spring:
   config:
     activate:
-      on-profile: dev
+      on-profile: postgresql
 
   datasource:
     url: jdbc:postgresql://localhost:5432/play-ground
@@ -21,7 +21,7 @@ spring:
 spring:
   config:
     activate:
-      on-profile: test
+      on-profile: h2
 
   datasource:
     url: jdbc:h2:mem:test

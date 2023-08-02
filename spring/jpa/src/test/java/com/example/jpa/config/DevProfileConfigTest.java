@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest
-@ActiveProfiles("dev")
+@ActiveProfiles("postgresql")
 public class DevProfileConfigTest {
 
     @Value("${spring.datasource.url}")
