@@ -26,7 +26,7 @@ class LockTestCaseTest {
     public void testCannotAcquireLockException() throws InterruptedException {
         // given
         UUID accountId = UUID.randomUUID();
-        accountRepository.save(new Account(accountId, null, null));
+        accountRepository.save(new Account(accountId, null, "before updating"));
 
         // when
         new Thread(() -> {
@@ -36,7 +36,6 @@ class LockTestCaseTest {
                 throw new RuntimeException(e);
             }
         }).start();
-        Thread.sleep(1000);
 
         // then
         assertThrows(CannotAcquireLockException.class, () -> {
@@ -51,7 +50,7 @@ class LockTestCaseTest {
     public void testSecondTxWaiteLockOfFirstTx() throws InterruptedException {
         // given
         UUID accountId = UUID.randomUUID();
-        accountRepository.save(new Account(accountId, null, null));
+        accountRepository.save(new Account(accountId, null, "before updating"));
 
         // when
         new Thread(() -> {
@@ -61,8 +60,6 @@ class LockTestCaseTest {
                 throw new RuntimeException(e);
             }
         }).start();
-        Thread.sleep(1000);
-
         lockTestCase.testSecondTxWaiteLockFromFirstTx(accountId, "second tx", false, true);
 
         // then
