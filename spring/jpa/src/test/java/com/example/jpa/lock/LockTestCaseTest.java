@@ -23,7 +23,7 @@ class LockTestCaseTest {
     AccountRepository accountRepository;
 
     @Test
-    public void testCannotAcquireLockException() throws InterruptedException {
+    public void testCannotAcquireLockException() {
         // given
         UUID accountId = UUID.randomUUID();
         accountRepository.save(new Account(accountId, null, "before updating"));
@@ -45,7 +45,6 @@ class LockTestCaseTest {
         assertEquals("first tx", account.name);
     }
 
-
     @Test
     public void testSecondTxWaiteLockOfFirstTx() throws InterruptedException {
         // given
@@ -65,6 +64,52 @@ class LockTestCaseTest {
         // then
         Account account = accountRepository.findById(accountId).get();
         assertEquals("second tx", account.name);
+    }
+
+    @Test
+    public void testLostUpdate_when_isolation_level_REPEATABLE_READ(){
+        // given
+        UUID accountId = UUID.randomUUID();
+        accountRepository.save(new Account(accountId, null, "before updating", "before updating"));
+
+        // when
+        new Thread(() -> {
+            try {
+                lockTestCase.testLostUpdateOfREPEATABLE_READ(accountId, true, false);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+
+        // then
+        assertThrows(CannotAcquireLockException.class, () -> {
+            lockTestCase.testLostUpdateOfREPEATABLE_READ(accountId, false, true);
+        });
+        Account account = accountRepository.findById(accountId).get();
+        assertEquals("nameToUpdate", account.name);
+        assertEquals("before updating", account.address);
+    }
+
+    @Test
+    public void testLostUpdate_when_isolation_level_READ_COMMITTED() throws InterruptedException {
+        // given
+        UUID accountId = UUID.randomUUID();
+        accountRepository.save(new Account(accountId, null, "before updating", "before updating"));
+
+        // when
+        new Thread(() -> {
+            try {
+                lockTestCase.testLostUpdateOfREAD_COMMITTED(accountId, true, false);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+        lockTestCase.testLostUpdateOfREAD_COMMITTED(accountId, false, true);
+
+        // then
+        Account account = accountRepository.findById(accountId).get();
+        assertEquals("before updating", account.name);
+        assertEquals("addressToUpdate", account.address);
     }
 
 }

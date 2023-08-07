@@ -11,8 +11,8 @@ public class Account {
     @Id
     public UUID id;
     public UUID organizationId;
-
     public String name;
+    public String address;
 
     public Account() {
         id = UUID.randomUUID();
@@ -22,6 +22,13 @@ public class Account {
         this.id = id;
         this.organizationId = organizationId;
         this.name = name;
+    }
+
+    public Account(UUID id, UUID organizationId, String name, String address) {
+        this.id = id;
+        this.organizationId = organizationId;
+        this.name = name;
+        this.address = address;
     }
 
     @Override
