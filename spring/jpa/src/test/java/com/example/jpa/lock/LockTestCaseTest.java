@@ -2,6 +2,7 @@ package com.example.jpa.lock;
 
 import com.example.jpa.Account;
 import com.example.jpa.AccountRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,6 +22,11 @@ class LockTestCaseTest {
 
     @Autowired
     AccountRepository accountRepository;
+
+    @BeforeEach
+    void init() {
+        accountRepository.deleteAll();
+    }
 
     @Test
     public void testCannotAcquireLockException() {

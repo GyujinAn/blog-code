@@ -104,4 +104,25 @@ class JpaCashingTest {
         assertEquals(1, accounts.size());
         assertEquals("world", accounts.get(0).name);
     }
+
+    @Transactional
+    @Test
+    public void not_use_cashing_when_find_by_column_not_pk() {
+        // given
+        UUID pk = UUID.randomUUID();
+        String nameNotPk = "hello";
+        Account orignalAccount = new Account(pk, UUID.randomUUID(), nameNotPk);
+        accountRepository.save(orignalAccount);
+        entityManager.flush();
+        entityManager.clear();
+        Account account1 = accountRepository.findById(pk).get();
+
+        // when
+        System.out.println("the sql statement should be sent, not using cashing");
+        Account account2 = accountRepository.findByName(nameNotPk).get();
+        System.out.println("because the nameNotPk argument is not pk of account table");
+
+        // then
+
+    }
 }
