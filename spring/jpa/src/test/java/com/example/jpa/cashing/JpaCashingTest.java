@@ -140,6 +140,7 @@ class JpaCashingTest {
         System.out.println("the sql statement should be sent, not using cashing");
         Account account2 = accountRepository.findByIdJpql(pk).get();
         System.out.println("because the findByIdJpql is JPQL query");
+        // refer to https://docs.jboss.org/hibernate/orm/5.6/userguide/html_single/Hibernate_User_Guide.html#fetching-direct-vs-query
 
         // then
     }
