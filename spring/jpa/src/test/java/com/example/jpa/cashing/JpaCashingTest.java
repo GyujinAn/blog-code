@@ -123,6 +123,26 @@ class JpaCashingTest {
         System.out.println("because the nameNotPk argument is not pk of account table");
 
         // then
-
     }
+
+    @Transactional
+    @Test
+    public void not_use_cashing_when_using_jpql() {
+        // given
+        UUID pk = UUID.randomUUID();
+        Account orignalAccount = new Account(pk, UUID.randomUUID(), "name");
+        accountRepository.save(orignalAccount);
+        entityManager.flush();
+        entityManager.clear();
+        Account account1 = accountRepository.findById(pk).get();
+
+        // when
+        System.out.println("the sql statement should be sent, not using cashing");
+        Account account2 = accountRepository.findByIdJpql(pk).get();
+        System.out.println("because the findByIdJpql is JPQL query");
+
+        // then
+    }
+
+
 }
