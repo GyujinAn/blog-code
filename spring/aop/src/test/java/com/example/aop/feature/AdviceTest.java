@@ -1,36 +1,27 @@
 package com.example.aop.feature;
 
-import com.example.aop.Account;
-import com.example.aop.AccountRepository;
-import com.example.aop.UpdateAccountDto;
-import com.example.aop.UpdateAccountUseCase;
+import com.example.aop.sample.SampleDto;
+import com.example.aop.sample.SampleUseCase;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.UUID;
 
 @SpringBootTest
 public class AdviceTest {
 
     @Autowired
-    AccountRepository accountRepository;
-
-    @Autowired
-    UpdateAccountUseCase updateAccountUseCase;
+    SampleUseCase sampleUseCase;
 
     @Transactional
     @Test
-    public void testBeforeAdvice() throws Exception {
-
+    public void testAdvice() throws Exception {
         // given
-        Account account = new Account();
-        accountRepository.save(account);
+        SampleDto sampleDto = new SampleDto("1", "2", "3");
 
         // when
-        updateAccountUseCase.execute(new UpdateAccountDto(account.id, UUID.randomUUID(), "new name", "new address"));
-
+        sampleUseCase.execute(sampleDto);
 
         // then
 

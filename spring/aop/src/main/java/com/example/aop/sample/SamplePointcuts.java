@@ -1,11 +1,11 @@
-package com.example.aop;
+package com.example.aop.sample;
 
 import org.aspectj.lang.annotation.Pointcut;
 
-public class Pointcuts {
+public class SamplePointcuts {
 
-    @Pointcut("execution(* com.example.aop.*.execute(..))")
-    public void anyExecute() {}
+    @Pointcut("execution(* com.example.aop.sample.*.execute(..))")
+    public void anyExecuteOfSample() {}
 
     @Pointcut("execution(public * *(..))")
     public void publicMethod() {}
