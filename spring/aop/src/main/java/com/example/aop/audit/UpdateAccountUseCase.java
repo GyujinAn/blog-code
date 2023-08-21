@@ -1,4 +1,4 @@
-package com.example.aop;
+package com.example.aop.audit;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -12,6 +12,7 @@ public class UpdateAccountUseCase {
 
     private final AccountRepository accountRepository;
 
+    @RestoreAudit
     @Transactional
     public Account execute(UpdateAccountDto dto) throws Exception {
         Account account;
@@ -24,10 +25,4 @@ public class UpdateAccountUseCase {
 
         return account.update(dto);
     }
-
-    @Transactional
-    public void execute() throws Exception {
-
-    }
-
 }

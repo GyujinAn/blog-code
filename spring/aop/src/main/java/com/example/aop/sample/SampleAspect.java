@@ -1,6 +1,6 @@
 package com.example.aop.sample;
 
-import com.example.aop.Account;
+import com.example.aop.audit.Account;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -73,5 +73,12 @@ public class SampleAspect {
         return retVal;
     }
 
+    @Around("@annotation(com.example.aop.sample.SampleAnnotation)")
+    public Object doSomethingAroundWithAnnotation(ProceedingJoinPoint pjp) throws Throwable {
+        System.out.println("this is around before");
+        Object retVal = pjp.proceed();
+        System.out.println("this is around after");
+        return retVal;
+    }
 
 }

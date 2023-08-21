@@ -1,4 +1,4 @@
-package com.example.aop;
+package com.example.aop.audit;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,8 +8,8 @@ import java.util.UUID;
 
 @AllArgsConstructor
 public class UpdateAccountDto {
-    public UUID accountId;
-    public UUID organizationId;
+    public Long accountId;
+    public Long organizationId;
     public String name;
     public String address;
 }
