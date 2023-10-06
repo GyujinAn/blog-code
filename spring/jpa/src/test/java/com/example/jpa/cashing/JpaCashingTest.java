@@ -4,12 +4,15 @@ import com.example.jpa.Account;
 import com.example.jpa.AccountRepository;
 import com.example.jpa.Organization;
 import com.example.jpa.OrganizationRepository;
+import org.hibernate.Session;
+import org.hibernate.stat.SecondLevelCacheStatistics;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import javax.persistence.Cache;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.HashSet;
@@ -145,5 +148,32 @@ class JpaCashingTest {
         // then
     }
 
+    @Transactional
+    @Test
+    public void when_new_instance_with_same_pk_em_execute_update() {
+        // given
+        UUID pk = UUID.randomUUID();
+        accountRepository.save(
+                new Account(pk, UUID.randomUUID(), "name")
+        );
 
+        for (int i = 0; i < 3; i++) {
+            accountRepository.save(
+                    new Account(UUID.randomUUID(), UUID.randomUUID(), "name")
+            );
+        }
+        entityManager.flush();
+        entityManager.clear();
+
+        // when
+        Account account = new Account(pk, UUID.randomUUID(), "name");
+        accountRepository.save(account);
+        entityManager.flush();
+        entityManager.clear();
+
+
+        // then
+        List<Account> allAccount = accountRepository.findAll();
+        assertEquals(4, allAccount.size());
+    }
 }

@@ -4,7 +4,7 @@ spring:
       on-profile: postgresql
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/play-ground
+    url: jdbc:postgresql://localhost:5432/play_ground
     username:
     password:
 
