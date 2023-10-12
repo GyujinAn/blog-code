@@ -13,6 +13,26 @@ import java.util.List;
 @SpringBootTest
 public class MessagingTest {
 
+    // https://firebase.google.com/docs/cloud-messaging/manage-topics#java
+    @Test
+    public void create_topic() throws FirebaseMessagingException {
+        String topicName = "topicName";
+
+        // These registration tokens come from the client FCM SDKs.
+        List<String> registrationTokens = Arrays.asList(
+                "YOUR_REGISTRATION_TOKEN_1",
+                // ...
+                "YOUR_REGISTRATION_TOKEN_n"
+        );
+
+        // Subscribe the devices corresponding to the registration tokens to the
+        // topic.
+        TopicManagementResponse response = FirebaseMessaging.getInstance().subscribeToTopic(registrationTokens, topicName);
+        // See the TopicManagementResponse reference documentation
+        // for the contents of response.
+        System.out.println(response.getSuccessCount() + " tokens were subscribed successfully");
+    }
+
     // https://firebase.google.com/docs/cloud-messaging/send-message#send-messages-to-specific-devices
     @Test
     public void send_messages_to_specific_devices() throws FirebaseMessagingException {
