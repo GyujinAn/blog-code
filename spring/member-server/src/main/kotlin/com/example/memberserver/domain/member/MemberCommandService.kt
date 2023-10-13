@@ -1,5 +1,6 @@
-package com.example.userserverfirebasespringkotlin
+package com.example.memberserver.domain.member
 
+import com.example.memberserver.domain.permission.PermissionRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

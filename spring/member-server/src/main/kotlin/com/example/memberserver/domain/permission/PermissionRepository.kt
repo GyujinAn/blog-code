@@ -1,4 +1,4 @@
-package com.example.userserverfirebasespringkotlin
+package com.example.memberserver.domain.permission
 
 import org.springframework.data.jpa.repository.JpaRepository
 

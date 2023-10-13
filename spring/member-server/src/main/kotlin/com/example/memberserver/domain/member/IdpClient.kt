@@ -1,4 +1,6 @@
-package com.example.userserverfirebasespringkotlin
+package com.example.memberserver.domain.member
+
+import com.example.memberserver.domain.member.Member
 
 
 interface IdpClient {

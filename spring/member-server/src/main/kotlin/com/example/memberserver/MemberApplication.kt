@@ -1,11 +1,11 @@
-package com.example.userserverfirebasespringkotlin
+package com.example.memberserver
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class UserServerFirebaseSpringKotlinApplication
+class MemberApplication
 
 fun main(args: Array<String>) {
-	runApplication<UserServerFirebaseSpringKotlinApplication>(*args)
+	runApplication<MemberApplication>(*args)
 }

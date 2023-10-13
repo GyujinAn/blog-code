@@ -1,4 +1,4 @@
-package com.example.userserverfirebasespringkotlin
+package com.example.memberserver.domain.member
 
 data class MemberDto(
     val name: String = "",

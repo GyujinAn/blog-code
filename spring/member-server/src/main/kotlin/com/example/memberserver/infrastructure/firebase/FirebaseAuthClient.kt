@@ -1,10 +1,11 @@
-package com.example.userserverfirebasespringkotlin
+package com.example.memberserver.infrastructure.firebase
 
+import com.example.memberserver.domain.member.IdpClient
+import com.example.memberserver.domain.member.Member
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserRecord
 import org.springframework.stereotype.Component
 
-@Component
 class FirebaseAuthClient: IdpClient {
     override fun createMember(member: Member, password: String): Long? {
         val createRequest = UserRecord.CreateRequest()

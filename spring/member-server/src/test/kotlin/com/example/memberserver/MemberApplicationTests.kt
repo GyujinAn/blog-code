@@ -1,10 +1,10 @@
-package com.example.userserverfirebasespringkotlin
+package com.example.memberserver
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class UserServerFirebaseSpringKotlinApplicationTests {
+class MemberApplicationTests {
 
 	@Test
 	fun contextLoads() {

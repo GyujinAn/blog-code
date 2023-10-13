@@ -1,5 +1,9 @@
-package com.example.userserverfirebasespringkotlin
+package com.example.memberserver
 
+import com.example.memberserver.domain.member.MemberDto
+import com.example.memberserver.domain.member.MemberRepository
+import com.example.memberserver.domain.permission.Permission
+import com.example.memberserver.domain.permission.PermissionRepository
 import com.google.firebase.auth.FirebaseAuth
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

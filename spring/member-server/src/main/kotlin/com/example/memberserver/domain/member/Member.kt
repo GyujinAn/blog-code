@@ -1,5 +1,6 @@
-package com.example.userserverfirebasespringkotlin
+package com.example.memberserver.domain.member
 
+import com.example.memberserver.domain.permission.Permission
 import java.time.Instant
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -43,7 +44,7 @@ class Member(
         return copy()
     }
 
-    private fun copy(): Member{
+    private fun copy(): Member {
         return Member(
             id = id,
             name = name,

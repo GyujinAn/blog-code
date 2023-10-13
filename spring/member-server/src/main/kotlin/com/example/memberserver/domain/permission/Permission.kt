@@ -1,11 +1,10 @@
-package com.example.userserverfirebasespringkotlin
+package com.example.memberserver.domain.permission
 
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
-import javax.persistence.ManyToMany
 
 @Entity
 class Permission(
