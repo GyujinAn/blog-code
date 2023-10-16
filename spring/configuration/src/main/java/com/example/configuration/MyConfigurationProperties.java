@@ -8,8 +8,8 @@ import org.springframework.boot.context.properties.ConstructorBinding;
 @Getter
 @AllArgsConstructor
 @ConstructorBinding
-@ConfigurationProperties(prefix = "sample")
-public class SampleConfigurationProperties {
+@ConfigurationProperties(prefix = "my")
+public class MyConfigurationProperties {
     private String a;
 
     private String b;
