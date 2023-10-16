@@ -12,7 +12,7 @@ public class BeanTest {
     ConfigurableListableBeanFactory configurableListableBeanFactory;
 
     @Test
-    public void display_bean_definition_name() {
+    public void display_bean_definition_names() {
         String[] beanDefinitionNames = configurableListableBeanFactory.getBeanDefinitionNames();
 
         System.out.println("Display bean definition names");

@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 @TestPropertySource(properties = {
         "my.a=goodbye",
-        "my.b=world"
+        "my.b=earth"
 })
 public class ConfigurationPropertiesTest {
 
@@ -23,6 +23,6 @@ public class ConfigurationPropertiesTest {
         MyConfigurationProperties myConfigurationProperties = (MyConfigurationProperties) context.getBean("my-com.example.configuration.MyConfigurationProperties");
 
         assertEquals(myConfigurationProperties.getA() ,"goodbye");
-        assertEquals(myConfigurationProperties.getB() ,"world");
+        assertEquals(myConfigurationProperties.getB() ,"earth");
     }
 }
