@@ -19,8 +19,9 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	implementation("com.google.firebase:firebase-admin:9.1.1")
+    testImplementation("junit:junit:4.13.1")
 
-	compileOnly ("org.projectlombok:lombok")
+    compileOnly ("org.projectlombok:lombok")
 	annotationProcessor ("org.projectlombok:lombok")
 }
 
