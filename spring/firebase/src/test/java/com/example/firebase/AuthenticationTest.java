@@ -11,7 +11,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.junit.jupiter.api.Test;
 
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 public class AuthenticationTest {
@@ -20,7 +24,7 @@ public class AuthenticationTest {
     @Test
     public void create_a_user() throws FirebaseAuthException {
         // given
-        String email = "user@example.com";
+        String email = UUID.randomUUID() + "@example.com";
         CreateRequest request = new CreateRequest()
                 .setEmail(email);
 
@@ -29,19 +33,16 @@ public class AuthenticationTest {
 
         // then
         assertEquals(email, userRecord.getEmail());
+
+        FirebaseAuth.getInstance().deleteUser(userRecord.getUid());
     }
 
     // https://firebase.google.com/docs/auth/admin/manage-users#update_a_user
     @Test
     public void update_a_user() throws FirebaseAuthException {
         // given
-        String email = "user@example.com";
-        String uid = FirebaseAuth
-                .getInstance()
-                .createUser(new CreateRequest().setEmail(email))
-                .getUid();
-
-        String updatedEmail = "update@example.com";
+        String uid = createUser().getUid();
+        String updatedEmail = UUID.randomUUID() + "@example.com";
         UpdateRequest request = new UpdateRequest(uid)
                 .setEmail(updatedEmail);
 
@@ -50,6 +51,55 @@ public class AuthenticationTest {
         
         // then
         assertEquals(updatedEmail, userRecord.getEmail());
+
+        FirebaseAuth.getInstance().deleteUser(userRecord.getUid());
+    }
+
+    @Test
+    public void delete_all_user() throws FirebaseAuthException {
+        // given
+        createUser();
+        createUser();
+        createUser();
+
+        // Iterate through all users. This will still retrieve users in batches,
+        // buffering no more than 1000 users in memory at a time.
+        ListUsersPage page = FirebaseAuth.getInstance().listUsers(null);
+        for (ExportedUserRecord user : page.iterateAll()) {
+            // when
+            FirebaseAuth.getInstance().deleteUserAsync(user.getUid());
+        }
+
+        // then
+        ListUsersPage result = FirebaseAuth.getInstance().listUsers(null);
+        assertFalse(result.hasNextPage());
+
+    }
+
+    // https://firebase.google.com/docs/auth/admin/manage-sessions#revoke_refresh_tokens
+    @Test
+    public void revoke_refresh_tokens() throws FirebaseAuthException {
+        // given
+        long nowSeconds = System.currentTimeMillis() / 1000;
+        String uid = createUser().getUid();
+
+        // when
+        FirebaseAuth.getInstance().revokeRefreshTokens(uid);
+        UserRecord user = FirebaseAuth.getInstance().getUser(uid);
+        // Convert to seconds as the auth_time in the token claims is in seconds too.
+        long revocationSecond = user.getTokensValidAfterTimestamp() / 1000;
+
+        // then
+        assertTrue(nowSeconds < revocationSecond);
+    }
+
+    private UserRecord createUser() throws FirebaseAuthException {
+        String email = UUID.randomUUID() + "@example.com";
+        CreateRequest request = new CreateRequest()
+                .setEmail(email);
+
+
+        return FirebaseAuth.getInstance().createUser(request);
     }
 
     @AfterEach
