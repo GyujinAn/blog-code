@@ -4,6 +4,7 @@ import com.google.firebase.auth.ExportedUserRecord;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.ListUsersPage;
+import com.google.firebase.auth.UserMetadata;
 import com.google.firebase.auth.UserRecord;
 import com.google.firebase.auth.UserRecord.CreateRequest;
 import com.google.firebase.auth.UserRecord.UpdateRequest;
@@ -19,6 +20,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 public class AuthenticationTest {
+
+    // https://firebase.google.com/docs/auth/admin/manage-users#retrieve_user_data
+    @Test
+    public void retrieve_user_data() throws FirebaseAuthException {
+        // given
+        long nowSeconds = System.currentTimeMillis();
+        String uid = createUser().getUid();
+
+        // when
+        UserRecord userRecord = FirebaseAuth.getInstance().getUser(uid);
+
+        // then
+        UserMetadata userMetadata = userRecord.getUserMetadata();
+        assertTrue(nowSeconds < userMetadata.getCreationTimestamp());
+    }
 
     // https://firebase.google.com/docs/auth/admin/manage-users#create_a_user
     @Test
@@ -97,7 +113,6 @@ public class AuthenticationTest {
         String email = UUID.randomUUID() + "@example.com";
         CreateRequest request = new CreateRequest()
                 .setEmail(email);
-
 
         return FirebaseAuth.getInstance().createUser(request);
     }

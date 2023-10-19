@@ -9,9 +9,13 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
 
 import javax.servlet.Filter;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,32 +35,33 @@ public class SecurityConfigurationTest {
 
         @Bean
         SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//            http.csrf().disable()
-//                    .httpBasic().disable()
-//                    .sessionManagement().disable()
-//                    .logout().disable()
-//                    .requestCache().disable()
-//                    .securityContext().disable();
+            http.csrf().disable()
+                    .httpBasic().disable()
+                    .sessionManagement().disable()
+                    .logout().disable()
+                    .requestCache().disable()
+                    .securityContext().disable();
 
 
-//            http.oauth2ResourceServer()
-//                    .jwt()
-//                    .jwtAuthenticationConverter(jwtAuthenticationConverter());
+            http.oauth2ResourceServer()
+                    .jwt()
+                    .jwtAuthenticationConverter(jwtAuthenticationConverter())
+                    .authenticationManager();
             return http.build();
         }
 
-//        private JwtAuthenticationConverter jwtAuthenticationConverter() {
-//            JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
-//            converter.setJwtGrantedAuthoritiesConverter(jwt -> {
-//                List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-//                List<String> permissionList = jwt.getClaimAsStringList("PERMISSION_JWT_KEY");
-//                for (String permission : permissionList) {
-//                    authorities.add(new SimpleGrantedAuthority(permission));
-//                }
-//                return Collections.unmodifiableCollection(authorities);
-//            });
-//            return converter;
-//        }
+        private JwtAuthenticationConverter jwtAuthenticationConverter() {
+            JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
+            converter.setJwtGrantedAuthoritiesConverter(jwt -> {
+                List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+                List<String> permissionList = jwt.getClaimAsStringList("PERMISSION_JWT_KEY");
+                for (String permission : permissionList) {
+                    authorities.add(new SimpleGrantedAuthority(permission));
+                }
+                return Collections.unmodifiableCollection(authorities);
+            });
+            return converter;
+        }
     }
 
     @Test
@@ -68,8 +73,9 @@ public class SecurityConfigurationTest {
 
         List<Filter> filters = filterChain.getFilters();
 
-        assertEquals(11, filters.size());
+        System.out.println("filters: " + filters);
 
+        assertEquals(6, filters.size());
     }
 
     private void displayBeanDefinitionNames() {
