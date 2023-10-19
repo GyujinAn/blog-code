@@ -45,8 +45,7 @@ public class SecurityConfigurationTest {
 
             http.oauth2ResourceServer()
                     .jwt()
-                    .jwtAuthenticationConverter(jwtAuthenticationConverter())
-                    .authenticationManager();
+                    .jwtAuthenticationConverter(jwtAuthenticationConverter());
             return http.build();
         }
 

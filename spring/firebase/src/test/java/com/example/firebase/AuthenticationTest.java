@@ -41,16 +41,17 @@ public class AuthenticationTest {
     public void create_a_user() throws FirebaseAuthException {
         // given
         String email = UUID.randomUUID() + "@example.com";
+        String password = "password";
         CreateRequest request = new CreateRequest()
-                .setEmail(email);
+                .setEmail(email)
+                .setPassword(password)
+                ;
 
         // when
         UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
 
         // then
         assertEquals(email, userRecord.getEmail());
-
-        FirebaseAuth.getInstance().deleteUser(userRecord.getUid());
     }
 
     // https://firebase.google.com/docs/auth/admin/manage-users#update_a_user
@@ -67,8 +68,6 @@ public class AuthenticationTest {
         
         // then
         assertEquals(updatedEmail, userRecord.getEmail());
-
-        FirebaseAuth.getInstance().deleteUser(userRecord.getUid());
     }
 
     @Test
