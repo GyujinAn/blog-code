@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="myServiceA" class="com.example.core.MyServiceA">
+        <constructor-arg value="a"/>
+    </bean>
+
+    <bean id="myServiceB"
+          class="com.example.core.MyServiceB"
+          factory-method="createMyBeanB">
+    </bean>
+
+    <bean id="myServiceLocator" class="com.example.core.MyServiceLocator">
+    </bean>
+
+    <bean id="myServiceC"
+          factory-bean="myServiceLocator"
+          factory-method="createMyServiceC" >
+
+    </bean>
+</beans>

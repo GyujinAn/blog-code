@@ -5,6 +5,6 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public class MyBeanB {
+public class MyServiceC {
     private final String name;
 }

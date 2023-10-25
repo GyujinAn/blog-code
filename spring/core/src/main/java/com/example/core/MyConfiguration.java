@@ -7,13 +7,13 @@ import org.springframework.context.annotation.Configuration;
 public class MyConfiguration {
 
     @Bean
-    MyBeanA myBeanA() {
-        return new MyBeanA("hello");
+    MyServiceA myBeanA() {
+        return new MyServiceA("hello");
     }
 
     @Bean
-    MyBeanB myBeanB() {
-        return new MyBeanB("world");
+    MyServiceB myBeanB() {
+        return new MyServiceB("world");
     }
 }
 

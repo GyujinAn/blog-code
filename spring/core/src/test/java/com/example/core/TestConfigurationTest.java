@@ -23,18 +23,18 @@ public class TestConfigurationTest {
     public void get_bean_from_inner_test_configuration() {
         displayBeanDefinitionNames();
 
-        MyBeanA myBeanA = (MyBeanA) context.getBean("myBeanA");
+        MyServiceA myServiceA = (MyServiceA) context.getBean("myBeanA");
 
-        assertEquals(myBeanA.getName(), "goodbye");
+        assertEquals(myServiceA.getName(), "goodbye");
     }
 
     @Test
     public void get_bean_from_top_level_test_configuration() {
         displayBeanDefinitionNames();
 
-        MyBeanB myBeanB = (MyBeanB) context.getBean("myBeanB");
+        MyServiceB myServiceB = (MyServiceB) context.getBean("myBeanB");
 
-        assertEquals(myBeanB.getName(), "world");
+        assertEquals(myServiceB.getName(), "world");
     }
 
     private void displayBeanDefinitionNames() {
@@ -49,8 +49,8 @@ public class TestConfigurationTest {
     @TestConfiguration
     static class TestConfig {
         @Bean
-        MyBeanA myBeanA() {
-            return new MyBeanA("goodbye");
+        MyServiceA myBeanA() {
+            return new MyServiceA("goodbye");
         }
     }
 }
@@ -58,7 +58,7 @@ public class TestConfigurationTest {
 @TestConfiguration
 class TestConfig {
     @Bean
-    MyBeanB myBeanB() {
-        return new MyBeanB("earth");
+    MyServiceB myBeanB() {
+        return new MyServiceB("earth");
     }
 }
