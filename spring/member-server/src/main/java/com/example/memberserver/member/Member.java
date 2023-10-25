@@ -1,6 +1,7 @@
 package com.example.memberserver.member;
 
 import com.example.memberserver.common.BaseEntity;
+import com.example.memberserver.permission.Permission;
 import lombok.Getter;
 
 import javax.persistence.Column;

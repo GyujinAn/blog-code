@@ -1,5 +1,7 @@
 package com.example.memberserver.member;
 
+import com.example.memberserver.common.validator.MemberValidator;
+import com.example.memberserver.common.validator.ValidatorTemplate;
 import com.example.memberserver.infrastructure.IdProvier.IdpClient;
 import com.example.memberserver.infrastructure.IdProvier.aws.CognitoClient;
 import com.example.memberserver.infrastructure.IdProvier.firebase.FirebaseAuthClient;
@@ -24,6 +26,11 @@ public class MemberConfiguration {
         }
 
         throw new RuntimeException("Unsupported IdpProvider");
+    }
+
+    @Bean
+    public ValidatorTemplate<MemberDto> memberValidator() {
+        return new MemberValidator();
     }
 }
 

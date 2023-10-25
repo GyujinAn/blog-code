@@ -1,4 +1,4 @@
-package com.example.memberserver.member;
+package com.example.memberserver.permission;
 
 
 import javax.persistence.Column;

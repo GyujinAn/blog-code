@@ -2,14 +2,12 @@ package com.example.memberserver.infrastructure.IdProvier.firebase;
 
 import com.example.memberserver.infrastructure.IdProvier.IdpClient;
 import com.example.memberserver.member.Member;
-import com.example.memberserver.member.Permission;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.stream.Collectors;
 
 public class FirebaseAuthClient implements IdpClient {
 
