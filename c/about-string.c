@@ -38,11 +38,28 @@ void PrintDiffBwStrAndCharArray() {
     printf("=== end PrintDiffBwStrAndCharArray ===\n");    
 }
 
+void HowPrintfDetectLastOfString() {
+    printf("=== start HowPrintfDetectLastOfString ===\n");
+
+    char str[] = "hello world";
+    printf("%s \n", str);
+
+    str[5] = '\0';
+    printf("%s \n", str);
+
+    str[1] = '\0';
+    printf("%s \n", str);
+
+    printf("=== end HowPrintfDetectLastOfString ===\n");    
+}
+
 int main(int argc, char const *argv[])
 {
     PrintNullCharOfStr();
 
     PrintDiffBwStrAndCharArray();
+
+    HowPrintfDetectLastOfString();
 
 }
 
