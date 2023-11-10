@@ -11,5 +11,5 @@ public class Member {
 }
 
 enum Job {
-    DEVELOPER
+    DEVELOPER, DESIGNER
 }

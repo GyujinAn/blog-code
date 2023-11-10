@@ -9,9 +9,10 @@ public class LaptopPaymentUseCase {
 
         if (member.job == Job.DEVELOPER) {
             member.balance = member.balance - (LAPTOP_PRICE - 10);
+        } else if (member.job == Job.DESIGNER) {
+            member.balance = member.balance - (LAPTOP_PRICE - 20);
         } else {
             member.balance = member.balance - LAPTOP_PRICE;
         }
-
     }
 }
