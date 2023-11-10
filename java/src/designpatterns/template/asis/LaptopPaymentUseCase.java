@@ -7,6 +7,11 @@ public class LaptopPaymentUseCase {
     public void execute(String who) {
         Member member = members.get(who);
 
-        member.balance = member.balance - LAPTOP_PRICE;
+        if (member.job == Job.DEVELOPER) {
+            member.balance = member.balance - (LAPTOP_PRICE - 10);
+        } else {
+            member.balance = member.balance - LAPTOP_PRICE;
+        }
+
     }
 }
