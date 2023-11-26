@@ -70,23 +70,41 @@ void TowStringType() {
     printf("%s, %s \n", str1, str2);
 
     str1[0]='X';
-    str2[0]='X'; // runtime err
+    // runtime err
+    // str2[0]='X'; 
 
-    printf("%s, %s \n", str1, str2);
+    // printf("%s, %s \n", str1, str2);
     
     printf("=== end TowStringType ===\n\n");
+}
+
+void DoublePointerAccess() {
+    printf("=== start DoublePointerAccess ===\n");
+    double num = 3.14;
+    double *ptr = &num;
+    double **dptr = &ptr;
+    double *ptr2;
+
+    printf("%9p %9p \n", ptr, *dptr);
+    printf("%9g %9g \n", num, **dptr);
+    ptr2 = *dptr;
+    * ptr2 = 10.99;
+    printf("%9g, %9g \n", num, **dptr);
+    printf("=== end DoublePointerAccess ===\n\n");
 }
 
 int main(int argc, char const *argv[])
 {
 
-    PrintPointerSizeAndAddress();
+    // PrintPointerSizeAndAddress();
 
-    ArrayIsPointer();
+    // ArrayIsPointer();
 
-    PointerBaseArrayAccess();
+    // PointerBaseArrayAccess();
 
-    TowStringType();
+    // TowStringType();
+
+    DoublePointerAccess();
 
     return 0;
 }
