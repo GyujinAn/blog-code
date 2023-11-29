@@ -1,12 +1,40 @@
-import React, {useState} from 'react';
-import {ScrollView, TextInput, View} from 'react-native';
-import LocationInputButton from '../../components/LocationInputButton';
+import React, {useEffect, useState} from 'react';
+import {Pressable, ScrollView, Text, TextInput, View} from 'react-native';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import PhotoInputButton from '../../components/PhotoInputButton';
-import TimeInputButton from '../../components/TimeInputButton';
+import IconRightButton from '../../components/IconRightButton';
 
-function UploadScreen() {
+function UploadScreen({navigation, route}) {
   const [title, setTitle] = useState('');
   const [descriptio, setDescription] = useState('');
+  const [time, setTime] = useState(new Date());
+  const [location, setLocation] = useState('');
+  const [visibleTimePickerModal, setVisibleTimePickerModal] = useState(false);
+  const [form, setForm] = useState({
+    time: '',
+    location: '',
+  });
+
+  useEffect(() => {
+    setLocation(route.params?.location);
+  }, [navigation, route.params]);
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <IconRightButton
+          onPress={() => {
+            console.log('here is submit');
+            console.log(time);
+            console.log(location);
+          }}
+          name="send"
+        />
+      ),
+    });
+  }, [navigation, time, location]);
+
   return (
     <View>
       <ScrollView>
@@ -23,8 +51,26 @@ function UploadScreen() {
         />
       </ScrollView>
       <View>
-        <TimeInputButton />
-        <LocationInputButton />
+        <Pressable onPress={() => setVisibleTimePickerModal(true)}>
+          <Text>시간</Text>
+          <Icon name="access-time" color="black" size={24} />
+        </Pressable>
+        <DateTimePickerModal
+          isVisible={visibleTimePickerModal}
+          mode="datetime"
+          date={time}
+          // onConfirm={setTime}
+          onConfirm={() => {
+            setForm(form => {
+              ({...form, time});
+            });
+          }}
+          onCancel={() => setVisibleTimePickerModal(false)}
+        />
+        <Pressable onPress={() => navigation.push('LocationInputScreen', {})}>
+          <Text>위치</Text>
+          <Icon name="location-pin" color="black" size={24} />
+        </Pressable>
         <PhotoInputButton />
       </View>
     </View>

@@ -179,11 +179,19 @@ void ArrayPointerAndPointerArray()
     int i,
         j;
 
-    int *parr = {&num1,
-                 &num2,
-                 &num3,
-                 &num4};
-    int(*aptr)[4] = arr2d;
+    int *pointer_array[4] = {&num1,
+                             &num2,
+                             &num3,
+                             &num4};
+    int(*array_pointer)[4] = arr2d;
+
+    printf("%d %d %d %d \n", *pointer_array[0], *pointer_array[1], *pointer_array[2], *pointer_array[3]);
+    for (i = 0; i < 2; i++)
+    {
+        for (j = 0; j < 4; j++)
+            printf("%d ", array_pointer[i][j]);
+        printf("\n");
+    }
 }
 
 int main(int argc, char const *argv[])
@@ -205,7 +213,9 @@ int main(int argc, char const *argv[])
 
     // TwoDimensionArrayNameAndArrayPointer();
 
-    ArrayPointerAndPointerArray();
+    // ArrayPointerAndPointerArray();
+
+    // ArrayPointerAndPointerArray();
 
     return 0;
 }
