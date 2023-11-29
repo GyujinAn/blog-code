@@ -89,7 +89,7 @@ void TowStringType()
 void DoublePointerAccess()
 {
     printf("=== start DoublePointerAccess ===\n");
-    double num = 3.14;
+    double num = 3.1;
     double *ptr = &num;
     double **dptr = &ptr;
     double *ptr2;
@@ -194,6 +194,25 @@ void ArrayPointerAndPointerArray()
     }
 }
 
+void TowDemensionalArrayAccessType()
+{
+    int a[3][2] = {{1, 2}, {3, 4}, {5, 6}};
+
+    printf("a: %p \n", a);
+    printf("a[0]: %p \n", a[0]);
+    printf("*(a + 0): %p\n\n", *(a + 0));
+
+    printf("a[1]: %p \n", a[1]);
+    printf("*(a + 1): %p\n\n", *(a + 1));
+
+    printf("a[2]: %p \n", a[2]);
+    printf("*(a + 2): %p\n\n", *(a + 2));
+
+    printf("%d, %d \n", a[2][1], (*(a + 2))[1]);
+    printf("%d, %d \n", a[2][1], *(a[2] + 1));
+    printf("%d, %d \n", a[2][1], *(*(a + 2) + 1));
+}
+
 int main(int argc, char const *argv[])
 {
 
@@ -216,6 +235,8 @@ int main(int argc, char const *argv[])
     // ArrayPointerAndPointerArray();
 
     // ArrayPointerAndPointerArray();
+
+    TowDemensionalArrayAccessType();
 
     return 0;
 }
