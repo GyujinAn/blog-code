@@ -1,7 +1,7 @@
-import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
+import axios from 'axios';
 
 function GooglePlacesInput({onPress}) {
   const API_KEY = 'AIzaSyBj0wMOmewYI2xIbEwEimPOAjBdmiCwAMk';
@@ -11,7 +11,13 @@ function GooglePlacesInput({onPress}) {
       <GooglePlacesAutocomplete
         placeholder="Search"
         onPress={(data, details = null) => {
-          onPress(data);
+          console.log('data');
+          console.log(data);
+
+          console.log('details');
+          console.log(details);
+
+          onPress(data.place_id);
         }}
         query={{
           key: API_KEY,

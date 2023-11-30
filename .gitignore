@@ -35,3 +35,9 @@ node_modules/
 # firebase #
 firebase-service-account.json
 play-ground-b4aea-firebase-adminsdk-i5gjj-b0e170f95d.json
+
+# javascript #
+javascript/play-ground.js
+
+# react native
+reactnative/.env
