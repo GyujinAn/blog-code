@@ -1,27 +1,23 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
-import axios from 'axios';
+import Config from 'react-native-config';
 
 function GooglePlacesInput({onPress}) {
-  const API_KEY = 'AIzaSyBj0wMOmewYI2xIbEwEimPOAjBdmiCwAMk';
-
   return (
     <View style={styles.container}>
       <GooglePlacesAutocomplete
         placeholder="Search"
         onPress={(data, details = null) => {
-          console.log('data');
-          console.log(data);
-
-          console.log('details');
-          console.log(details);
-
-          onPress(data.place_id);
+          const location = {
+            place_id: data.place_id,
+            description: data.description,
+          };
+          onPress(location);
         }}
         query={{
-          key: API_KEY,
-          language: 'en',
+          key: Config.GOOGLE_API_KEY,
+          language: 'ko',
         }}
         onFail={error => console.error(error)}
         onNotFound={() => console.log('no results')}
