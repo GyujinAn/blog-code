@@ -53,6 +53,24 @@ void ReadString()
     }
 }
 
+void NeedInputBufFlush()
+{
+    char perID[7];
+    char name[10];
+
+    fputs("input your personal id: ", stdout);
+    fgets(perID, sizeof(perID), stdin);
+
+    while (getchar() != '\n')
+        ;
+
+    fputs("input your name: ", stdout);
+    fgets(name, sizeof(name), stdin);
+
+    printf("personal id: %s \n", perID);
+    printf("name: %s\n", name);
+}
+
 int main(int argc, char const *argv[])
 {
     // ReadWriteChar();
@@ -62,4 +80,6 @@ int main(int argc, char const *argv[])
     // WriteString();
 
     // ReadString();
+
+    NeedInputBufFlush();
 }
