@@ -41,6 +41,7 @@ javascript/play-ground.js
 
 # react native
 reactnative/.env
+reactnative/android/app/google-services.json
 
 # c
 c/exe
