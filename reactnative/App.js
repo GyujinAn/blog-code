@@ -6,6 +6,8 @@ import {createPost} from './lib/posts';
 import ScrollHideComponent from './practice/animated/ScrollHideComponent';
 import ComponentsForLayOut from './practice/layout/ComponentForLayOut';
 
+import ProfileScreen from './practice/profile/screens/ProfileScreen';
+
 const testCreatePost = async () => {
   console.log('testCreatePost is started');
   const org = {
@@ -15,10 +17,6 @@ const testCreatePost = async () => {
 };
 
 function App() {
-  // return <UploadStack />;
-  // return <BorderedInput />;
-  // return <Button title="Press me" onPress={testCreatePost} />;
-  // return <ScrollHideComponent />;
   return <ComponentsForLayOut />;
 }
 export default App;
