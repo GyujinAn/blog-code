@@ -1,110 +1,89 @@
-import React from 'react';
-import {
-  Image,
-  ImageBackground,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import React, {useState} from 'react';
+import {Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
 import Avatar from '../components/Avatar';
+import HomeIcon from '../components/HomeIcon';
+import OvalButton from '../components/OvalButton';
+import SettingIcon from '../components/SettingIcon';
+import StudyReportCard from '../components/StudyReportCard';
+import BookmarkCard from '../components/BookmarkCard';
 
 function ProfileScreen() {
-  const onPress = () => {
+  const profile = {
+    firstName: 'Anastasia',
+    lastName: 'Smith',
+  };
+
+  const [activeStudyReportsButton, setActiveStudyReportsButton] =
+    useState(true);
+
+  const studyReports = [
+    {title: 'Set #1', date: 'Sep 13-19', pts: 30},
+    {title: 'Set #2', date: 'Sep 13-18', pts: 29},
+    {title: 'Set #3', date: 'Sep 13-17', pts: 28},
+    {title: 'Set #4', date: 'Sep 13-16', pts: 27},
+    {title: 'Set #5', date: 'Sep 13-15', pts: 25},
+    {title: 'Set #6', date: 'Sep 13-14', pts: 26},
+  ];
+
+  const bookmarks = [
+    {title: 'The triangle above has an area 1', content: 'Set #1 - Reading'},
+    {title: 'The triangle above has an area 2', content: 'Set #2 - Reading'},
+    {title: 'The triangle above has an area 3', content: 'Set #3 - Reading'},
+    {title: 'The triangle above has an area 4', content: 'Set #4 - Reading'},
+    {title: 'The triangle above has an area 5', content: 'Set #5 - Reading'},
+    {title: 'The triangle above has an area 6', content: 'Set #6 - Reading'},
+  ];
+
+  const sayHello = () => {
     console.log('Hello');
   };
 
   return (
     <ScrollView style={styles.root}>
       <View style={styles.head}>
-        <Pressable style={styles.home} onPress={onPress}>
-          <Image source={require('../assets/home.png')} size={24} />
-        </Pressable>
+        <HomeIcon onPress={sayHello} />
         <Avatar style={styles.avatar} size={64} />
-        <Pressable hitSlop={8} onPress={onPress}>
-          <Image source={require('../assets/setting.png')} size={24} />
-        </Pressable>
+        <SettingIcon onPress={sayHello} />
       </View>
       <View style={styles.nameContainer}>
-        <Text style={styles.nameText}>Anastasia</Text>
-        <Text style={styles.nameText}>Smith</Text>
+        <Text style={styles.nameText}>{profile.firstName}</Text>
+        <Text style={styles.nameText}>{profile.lastName}</Text>
       </View>
       <View style={styles.editButtonContainer}>
-        <Pressable style={styles.editButton} onPress={onPress}>
+        <Pressable style={styles.editButton} onPress={sayHello}>
           <Text style={styles.editButtonText}>Edit</Text>
         </Pressable>
       </View>
-      <View style={styles.studyReportsBookmarksButtonsContainer}>
-        <View style={styles.studyReportsContainer}>
-          <ImageBackground
-            source={require('../assets/oval_copy.png')}
-            resizeMode="cover"
-            style={styles.studyReportsImageBackground}>
-            <Image
-              source={require('../assets/study_reports_active.png')}
-              style={styles.studyReportsIcon}
-            />
-            <Text style={styles.studyReportsText}>Study Reports</Text>
-          </ImageBackground>
-        </View>
-        <View style={styles.bookmarksContainer}>
-          <Image
-            source={require('../assets/section_bookmarks.png')}
-            style={styles.bookmarksIcon}
-          />
-          <Text style={styles.bookmarksText}>Bookmarks</Text>
-        </View>
+      <View style={styles.ovalButtonContainer}>
+        <OvalButton
+          active={activeStudyReportsButton}
+          name="Study Reports"
+          icon={require('../assets/study_reports_active.png')}
+          onPress={() => {
+            setActiveStudyReportsButton(true);
+          }}
+        />
+        <OvalButton
+          active={!activeStudyReportsButton}
+          name="Bookmarks"
+          icon={require('../assets/section_bookmarks.png')}
+          onPress={() => {
+            setActiveStudyReportsButton(false);
+          }}
+        />
       </View>
       <View style={styles.cardContainter}>
-        <View style={styles.card}>
-          <View style={styles.cardTitle}>
-            <Text style={styles.cardTitleText}>Set #2</Text>
-          </View>
-          <View style={styles.cardContent}>
-            <Text style={styles.cardContentText}>Sep 13-19</Text>
-          </View>
-        </View>
-        <View style={styles.card}>
-          <View style={styles.cardTitle}>
-            <Text style={styles.cardTitleText}>Set #2</Text>
-          </View>
-          <View style={styles.cardContent}>
-            <Text style={styles.cardContentText}>Sep 13-19</Text>
-          </View>
-        </View>
-        <View style={styles.card}>
-          <View style={styles.cardTitle}>
-            <Text style={styles.cardTitleText}>Set #2</Text>
-          </View>
-          <View style={styles.cardContent}>
-            <Text style={styles.cardContentText}>Sep 13-19</Text>
-          </View>
-        </View>
-        <View style={styles.card}>
-          <View style={styles.cardTitle}>
-            <Text style={styles.cardTitleText}>Set #2</Text>
-          </View>
-          <View style={styles.cardContent}>
-            <Text style={styles.cardContentText}>Sep 13-19</Text>
-          </View>
-        </View>
-        <View style={styles.card}>
-          <View style={styles.cardTitle}>
-            <Text style={styles.cardTitleText}>Set #2</Text>
-          </View>
-          <View style={styles.cardContent}>
-            <Text style={styles.cardContentText}>Sep 13-19</Text>
-          </View>
-        </View>
-        <View style={styles.card}>
-          <View style={styles.cardTitle}>
-            <Text style={styles.cardTitleText}>Set #2</Text>
-          </View>
-          <View style={styles.cardContent}>
-            <Text style={styles.cardContentText}>Sep 13-19</Text>
-          </View>
-        </View>
+        {activeStudyReportsButton
+          ? studyReports.map((item, index) => (
+              <StudyReportCard
+                title={item.title}
+                date={item.date}
+                pts={item.pts}
+              />
+            ))
+          : bookmarks.map((item, index) => (
+              <BookmarkCard title={item.title} content={item.content} />
+            ))}
       </View>
     </ScrollView>
   );
@@ -156,7 +135,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#333333',
   },
-  studyReportsBookmarksButtonsContainer: {
+  ovalButtonContainer: {
     // backgroundColor: '#44e50ac2',
     height: 88,
     marginTop: 16,
@@ -165,82 +144,10 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'space-between',
   },
-  studyReportsContainer: {
-    // backgroundColor: '#aae50ac2',
-    width: 120,
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  studyReportsImageBackground: {
-    width: 88,
-    height: 88,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  studyReportsIcon: {
-    marginTop: 24,
-  },
-  studyReportsText: {
-    width: 120,
-    height: 22,
-    fontSize: 16,
-    textAlign: 'center',
-    marginTop: 4,
-    color: '#333333',
-  },
-  bookmarksContainer: {
-    // backgroundColor: '#aae50ac2',
-    width: 120,
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  bookmarksIcon: {
-    marginTop: 24,
-  },
-  bookmarksText: {
-    width: 120,
-    height: 22,
-    fontSize: 16,
-    textAlign: 'center',
-    marginTop: 4,
-    color: '#333333',
-    opacity: 0.3,
-  },
   cardContainter: {
     // backgroundColor: '#44e50ac2',
     marginTop: 40,
     marginHorizontal: 28,
-  },
-  card: {
-    backgroundColor: '#F7F7F7',
-    marginBottom: 12,
-    height: 88,
-    borderRadius: 16,
-    alignItems: 'center',
-  },
-  cardTitle: {
-    // backgroundColor: '#aae50ac2',
-    height: 22,
-    width: 264,
-    marginTop: 20,
-    marginHorizontal: 20,
-  },
-  cardTitleText: {
-    fontSize: 16,
-    color: '#333',
-  },
-  cardContent: {
-    // backgroundColor: '#aae50ac2',
-    width: 264,
-    height: 22,
-    marginTop: 8,
-    fontSize: 12,
-  },
-  cardContentText: {
-    fontSize: 12,
-    color: '#AFAFAF',
   },
 });
 
