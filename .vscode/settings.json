@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "*.js": "javascriptreact",
-        "basicarith.h": "c"
+        "basicarith.h": "c",
+        "integerdiv.h": "c"
     }
 }
