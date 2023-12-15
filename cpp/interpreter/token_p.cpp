@@ -7,7 +7,7 @@
 
 using namespace std;
 
-enum TknKind
+enum TokenKind
 {
     LeftParenthesis = 1,
     RightParenthesis,
@@ -28,7 +28,7 @@ enum TknKind
     Else,
     End,
     Print,
-    Ident,
+    Identifier,
     IntegerNumber,
     String,
     Letter,
@@ -40,41 +40,41 @@ enum TknKind
 
 struct Token
 {
-    TknKind kind;
+    TokenKind kind;
     string text;
-    int intVal;
+    int intValue;
 
     Token()
     {
         kind = Others;
         text = ";";
-        intVal = 0;
+        intValue = 0;
     }
-    Token(TknKind k, const string &s, int d = 0)
+    Token(TokenKind k, const string &s, int d = 0)
     {
         kind = k;
         text = s;
-        intVal = d;
+        intValue = d;
     }
 };
 
-void initChTyp();
-Token nextTkn();
+void initChType();
+Token nextToken();
 int nextCh();
-bool is_ope2(int c1, int c2);
-TknKind get_kind(const string &s);
+bool isOperator2(int c1, int c2);
+TokenKind getKind(const string &s);
 
-TknKind ctyp[256];
+TokenKind charType[256];
 Token token;
 ifstream fin;
 
-struct KeyWord
+struct Keyword
 {
     const char *keyName;
-    TknKind keyKind;
+    TokenKind keyKind;
 };
 
-KeyWord KeyWdTbl[] = {
+Keyword KeywordTable[] = {
     {"if", If},
     {"else", Else},
     {"end", End},
@@ -113,52 +113,55 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
-    cout << "text   kind intVal\n";
-    initChTyp();
+    cout << "text     kind intVal\n";
+    initChType();
 
-    // for (token = nextTkn(); token.kind != EofTkn; token = nextTkn())
-    // {
-    // }
+    for (token = nextToken(); token.kind != EndOfToken; token = nextToken())
+    {
+        cout << left << setw(10) << token.text
+             << right << setw(3) << token.kind
+             << " " << token.intValue << endl;
+    }
 
     return 0;
 }
 
-void initChTyp()
+void initChType()
 {
     int i;
 
     for (i = 0; i < 256; i++)
     {
-        ctyp[i] = Others;
+        charType[i] = Others;
     }
 
     for (i = '0'; i <= '9'; i++)
     {
-        ctyp[i] = Digit;
+        charType[i] = Digit;
     }
 
     for (i = 'A'; i <= 'Z'; i++)
     {
-        ctyp[i] = Letter;
+        charType[i] = Letter;
     }
 
     for (i = 'a'; i <= 'z'; i++)
     {
-        ctyp[i] = Letter;
+        charType[i] = Letter;
     }
 
-    ctyp['('] = LeftParenthesis;
-    ctyp[')'] = RightParenthesis;
-    ctyp['<'] = Less;
-    ctyp['>'] = Great;
-    ctyp['+'] = Plus;
-    ctyp['-'] = Minus;
-    ctyp['*'] = Multi;
-    ctyp['/'] = Divi;
-    ctyp['_'] = Letter;
-    ctyp['='] = Assign;
-    ctyp[','] = Comma;
-    ctyp['"'] = DoubleQuote;
+    charType['('] = LeftParenthesis;
+    charType[')'] = RightParenthesis;
+    charType['<'] = Less;
+    charType['>'] = Great;
+    charType['+'] = Plus;
+    charType['-'] = Minus;
+    charType['*'] = Multi;
+    charType['/'] = Divi;
+    charType['_'] = Letter;
+    charType['='] = Assign;
+    charType[','] = Comma;
+    charType['"'] = DoubleQuote;
 
     // for (i = 0; i < 256; i++)
     // {
@@ -166,9 +169,9 @@ void initChTyp()
     // }
 }
 
-Token nextTkn()
+Token nextToken()
 {
-    TknKind kd;
+    TokenKind kind;
     int ch0, num = 0;
     static int ch = ' ';
     string txt = "";
@@ -183,16 +186,16 @@ Token nextTkn()
         return Token(EndOfToken, txt);
     }
 
-    switch (ctyp[ch])
+    switch (charType[ch])
     {
     case Letter:
-        for (; ctyp[ch] == Letter || ctyp[ch] == Digit; ch == nextCh())
+        for (; charType[ch] == Letter || charType[ch] == Digit; ch = nextCh())
         {
             txt += ch;
         }
         break;
     case Digit:
-        for (num = 0; ctyp[ch] == Digit; ch = nextCh())
+        for (num = 0; charType[ch] == Digit; ch = nextCh())
         {
             num = num * 10 + (ch - '0');
         }
@@ -213,15 +216,20 @@ Token nextTkn()
         txt += ch;
         ch0 = ch;
         ch = nextCh();
+        if (isOperator2(ch0, ch))
+        {
+            txt += ch;
+            ch = nextCh();
+        }
     }
 
-    kd = get_kind(txt);
-    if (kd == Others)
+    kind = getKind(txt);
+    if (kind == Others)
     {
         cout << "incorrect token: " << txt << endl;
         exit(1);
     }
-    return Token(kd, txt);
+    return Token(kind, txt);
 }
 
 int nextCh()
@@ -236,4 +244,36 @@ int nextCh()
         fin.close();
     }
     return c;
+}
+
+bool isOperator2(int c1, int c2)
+{
+    char s[] = "  ";
+    if (c1 == '\0' || c2 == '\0')
+    {
+        return false;
+    }
+    s[1] = c1;
+    s[2] = c2;
+    return strstr(" <= >= == != ", s) != NULL;
+}
+
+TokenKind getKind(const string &s)
+{
+    for (int i = 0; KeywordTable[i].keyKind != END_list; i++)
+    {
+        if (s == KeywordTable[i].keyName)
+        {
+            return KeywordTable[i].keyKind;
+        }
+    }
+    if (charType[s[0]] == Letter)
+    {
+        return Identifier;
+    }
+    if (charType[s[0] == Digit])
+    {
+        return IntegerNumber;
+    }
+    return Others;
 }
