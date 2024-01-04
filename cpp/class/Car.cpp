@@ -12,13 +12,3 @@ void Car::ShowCarState()
 {
     cout << "here is ShowCarState" << endl;
 }
-
-void Car::Accel()
-{
-    cout << "here is Accel" << endl;
-}
-
-void Car::Break()
-{
-    cout << "here is Break" << endl;
-}

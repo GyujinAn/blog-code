@@ -1,6 +1,9 @@
 #ifndef __CAR_H__
 #define __CAR_H__
 
+#include <iostream>
+using namespace std;
+
 namespace CAR_CONST
 {
     enum
@@ -26,5 +29,15 @@ public:
     void Accel();
     void Break();
 };
+
+inline void Car::Accel()
+{
+    cout << "here is Accel" << endl;
+}
+
+inline void Car::Break()
+{
+    cout << "here is Break" << endl;
+}
 
 #endif
