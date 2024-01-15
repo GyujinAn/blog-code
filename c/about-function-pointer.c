@@ -36,9 +36,9 @@ void VoidTypePointer()
 
 int main(int argc, char const *argv[])
 {
-    // FunctionPointer();
+    FunctionPointer();
 
-    VoidTypePointer();
+    // VoidTypePointer();
 
     return 0;
 }
