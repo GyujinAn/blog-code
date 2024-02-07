@@ -140,6 +140,172 @@ void showCoutOperatorOverloading()
     cout << pos2;
 }
 
+class First
+{
+private:
+    int num1, num2;
+
+public:
+    First(int n1 = 0, int n2 = 0) : num1(n1), num2(n2)
+    {
+        cout << "Here is constructor of First" << endl;
+    }
+
+    void ShowData()
+    {
+        cout << num1 << ", " << num2 << endl;
+    }
+};
+
+class Second
+{
+private:
+    int num3, num4;
+
+public:
+    Second(int n3 = 0, int n4 = 0) : num3(n3), num4(n4)
+    {
+        cout << "Here is constructor of Second" << endl;
+    }
+
+    void ShowData()
+    {
+        cout << num3 << ", " << num4 << endl;
+    }
+
+    Second &operator=(const Second &ref)
+    {
+        cout << "Second& operator=()" << endl;
+        num3 = ref.num3;
+        num4 = ref.num4;
+        return *this;
+    }
+};
+
+void showAssignmentOperatorOverloading()
+{
+    First fsrc(111, 222);
+    First fcpy;
+    Second ssrc(333, 444);
+    Second scpy;
+
+    fcpy = fsrc;
+    scpy = ssrc;
+
+    fcpy.ShowData();
+    scpy.ShowData();
+
+    First fob1, fob2;
+    Second sob1, sob2;
+
+    fob1 = fob2 = fsrc;
+    sob1 = sob2 = ssrc;
+
+    fob1.ShowData();
+    fob2.ShowData();
+
+    sob1.ShowData();
+    sob2.ShowData();
+}
+
+class Person
+{
+private:
+    char *name;
+    int age;
+
+public:
+    Person(char *myname, int myage)
+    {
+        int len = strlen(myname) + 1;
+        name = new char[len];
+        strcpy(name, myname);
+        age = myage;
+    }
+
+    void ShowPersonInfo() const
+    {
+        cout << "name: " << name << endl;
+        cout << "age: " << age << endl;
+    }
+
+    Person &operator=(const Person &ref)
+    {
+        delete[] name;
+        int len = strlen(ref.name) + 1;
+        name = new char[len];
+        strcpy(name, ref.name);
+        age = ref.age;
+        return *this;
+    }
+
+    ~Person()
+    {
+        delete[] name;
+        cout << " called destructor! " << endl;
+    }
+};
+
+void showAssignmentOperatorOverloadingBug()
+{
+    Person man1("Chris", 29);
+    Person man2("Jackson", 22);
+    man2 = man1;
+    man1.ShowPersonInfo();
+    man2.ShowPersonInfo();
+}
+
+class Hello
+{
+private:
+    int num1, num2;
+
+public:
+    Hello(int n1 = 0, int n2 = 0) : num1(n1), num2(n2) {}
+
+    void ShowData() { cout << num1 << "," << num2 << endl; }
+
+    Hello &operator=(const Hello &ref)
+    {
+        cout << "First& operator=()" << endl;
+        num1 = ref.num1;
+        num2 = ref.num2;
+        return *this;
+    }
+};
+
+class World : public Hello
+{
+private:
+    int num3, num4;
+
+public:
+    World(int n1, int n2, int n3, int n4) : Hello(n1, n2), num3(n3), num4(n4){};
+
+    void ShowData()
+    {
+        Hello::ShowData();
+        cout << num3 << "," << num4 << endl;
+    }
+
+    World &operator=(const World &ref)
+    {
+        cout << "Second& operator=()" << endl;
+        // Hello::operator=(ref);
+        num3 = ref.num3;
+        num4 = ref.num4;
+        return *this;
+    }
+};
+
+void showBaseClassOverloadingOperator()
+{
+    World ssrc(111, 222, 333, 444);
+    World scpy(0, 0, 0, 0);
+    scpy = ssrc;
+    scpy.ShowData();
+}
+
 int main(void)
 {
     // showBinaryOperatorOverloading();
@@ -150,7 +316,13 @@ int main(void)
 
     // showCommutativeOperatorOverloading();
 
-    showCoutOperatorOverloading();
+    // showCoutOperatorOverloading();
+
+    // showAssignmentOperatorOverloading();
+
+    // showAssignmentOperatorOverloadingBug();
+
+    showBaseClassOverloadingOperator();
 
     return 0;
 }
