@@ -1,0 +1,35 @@
+@startuml test
+
+interface Subject {
+    +registerObserver(Observer): void
+}
+
+class NewsStation {
+    +notify(Observer): void
+}
+
+interface Observer {
+    +update(): Subject
+}
+
+class FaxSender {
+    +update(): void
+}
+
+class MailSender {
+    +update(): void
+}
+
+class MessageSender {
+    +update(): void
+}
+
+
+Subject --> Observer
+Subject <|.. NewsStation
+Observer <|.. FaxSender
+Observer <|.. MailSender
+Observer <|.. MessageSender
+
+
+@enduml

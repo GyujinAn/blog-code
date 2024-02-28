@@ -6,7 +6,7 @@ package observer02;
  */
 public interface Subject {
 
-    void registeObserver(Observer observer);
+    void registerObserver(Observer observer);
 
     void removeObserver(Observer observer);
 

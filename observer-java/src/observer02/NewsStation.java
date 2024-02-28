@@ -38,7 +38,7 @@ public class NewsStation implements Subject {
     }
 
     @Override
-    public void registeObserver(Observer observer) {
+    public void registerObserver(Observer observer) {
         observers.add(observer);
     }
 

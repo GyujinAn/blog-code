@@ -12,6 +12,7 @@ import com.example.observerspringkotlin.service.watch.WatchRepository
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest
 class UpdateDataTest {
@@ -21,10 +22,10 @@ class UpdateDataTest {
     @Autowired private lateinit var phoneRepository: PhoneRepository
     @Autowired private lateinit var watchRepository: WatchRepository
 
+    @Transactional
     @Test
     fun updateData(){
         val stateData = createGivenData()
-
         stateData.forEach {
             updateStateDataServiceNewVersion.updateData(it)
         }
@@ -55,7 +56,7 @@ class UpdateDataTest {
             )
 
             if(it == 30) {
-                stateData.oxygenSaturation = 89
+                stateData.oxygenSaturation = 30
             }
 
             if(it in 51..59) {
@@ -69,6 +70,6 @@ class UpdateDataTest {
             stateData
         }
 
-        return listOf()
+        return stateData
     }
 }

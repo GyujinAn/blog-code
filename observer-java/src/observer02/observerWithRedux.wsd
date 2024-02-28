@@ -1,0 +1,29 @@
+@startuml observerWithRedux
+
+interface Subject {
+}
+
+class Redux {
+}
+
+interface Observer {
+}
+
+class QuestionDetailScreen {
+}
+
+class ReportScreen {
+}
+
+class StudyScreen {
+}
+
+
+Subject --> Observer
+Subject <|.. Redux
+Observer <|.. QuestionDetailScreen
+Observer <|.. ReportScreen
+Observer <|.. StudyScreen
+
+
+@enduml

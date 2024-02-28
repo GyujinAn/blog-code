@@ -8,9 +8,9 @@ public class Main {
 
     public static void main(String[] args) {
         NewsStation newsStation = new NewsStation();
-        newsStation.registeObserver(new FaxSender());
-        newsStation.registeObserver(new MailSender());
-        newsStation.registeObserver(new MessageSender());
+        newsStation.registerObserver(new FaxSender());
+        newsStation.registerObserver(new MailSender());
+        newsStation.registerObserver(new MessageSender());
         newsStation.breakNews("우크라이나 러시아 종전 선언","러시아 패배로 인하여 전쟁이 종료되었다.");
     }
 }
