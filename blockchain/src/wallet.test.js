@@ -3,6 +3,24 @@ const { Web3 } = require("web3");
 describe("wallet test", () => {
   const web3 = new Web3("http://127.0.0.1:8545");
 
+  // eth_getTransactionCount
+  // eth_blockNumber
+  // eth_sendRawTransaction
+
+  //   Transaction: 0x95cb780fe3d5f19e2806eaa6c6d7919b4ef71ed1ed3dd82f9ce954105a1afd64
+  //   Gas usage: 21000
+  //   Block Number: 1
+  //   Block Time: Tue Mar 26 2024 15:06:58 GMT+0900 (Korean Standard Time)
+
+  // eth_blockNumber
+  // eth_getBlockByNumber
+  // eth_getTransactionReceipt
+  // eth_getBalance
+  // eth_getBalance
+  // eth_getBalance
+  // eth_getBlockByHash
+  // eth_gasPrice
+
   it("send transaction", async () => {
     // given
     const privateKey = "";
